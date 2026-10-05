@@ -1,0 +1,4 @@
+const buttons={zh:document.getElementById('zh'),en:document.getElementById('en')};
+function setLanguage(lang){if(!['zh','en'].includes(lang))lang='zh';document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.querySelectorAll('[data-zh][data-en]').forEach(el=>el.textContent=el.dataset[lang]);Object.entries(buttons).forEach(([key,button])=>button.setAttribute('aria-pressed',String(key===lang)));document.title=lang==='zh'?'胡俊昊 · Junhao Hu | 学术主页':'Junhao Hu | Geophysics & Distributed Fiber-Optic Sensing';document.getElementById('diagram-title').textContent=lang==='zh'?'井筒概念剖面：固井、水力压裂与生产剖面监测':'Conceptual wellbore cross section: cementing, hydraulic fracturing and production monitoring';try{localStorage.setItem('junhao-language',lang)}catch{}}
+Object.entries(buttons).forEach(([lang,button])=>button.addEventListener('click',()=>setLanguage(lang)));
+let initial='zh';try{initial=localStorage.getItem('junhao-language')||'zh'}catch{}setLanguage(initial);
