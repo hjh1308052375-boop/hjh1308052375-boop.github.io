@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "dfos-principles",
+    "number": "01",
+    "category": "foundations",
+    "title": {
+      "zh": "分布式光纤传感的基本原理",
+      "en": "How distributed fiber-optic sensing works"
+    },
+    "summary": {
+      "zh": "从背向散射出发，理解 DAS、DTS 与 DSS 测到了什么，以及它们没有直接测到什么。",
+      "en": "Start with backscatter and understand what DAS, DTS, and DSS measure, and what still requires interpretation."
+    }
+  },
+  {
+    "slug": "downhole-deployment",
+    "number": "02",
+    "category": "foundations",
+    "title": {
+      "zh": "井下光纤的布设方式",
+      "en": "Deploying optical fiber downhole"
+    },
+    "summary": {
+      "zh": "套管外、油管上与临时下入：布设位置决定能观测什么，也决定怎样解释。",
+      "en": "Behind casing, on tubing, or temporarily conveyed: placement shapes both the observation and its interpretation."
+    }
+  },
+  {
+    "slug": "well-lifecycle",
+    "number": "03",
+    "category": "applications",
+    "title": {
+      "zh": "油气井的全生命周期",
+      "en": "The life cycle of an oil and gas well"
+    },
+    "summary": {
+      "zh": "从设计、钻井与完井，到生产、修井和封井：把监测问题放回真实的作业阶段。",
+      "en": "From design and drilling to operation, intervention, and closure: put each monitoring question in its operational context."
+    }
+  },
+  {
+    "slug": "dts-cement-hydration",
+    "number": "04",
+    "category": "applications",
+    "title": {
+      "zh": "用 DTS 观察水泥水化与凝结",
+      "en": "Using DTS to observe cement hydration and setting"
+    },
+    "summary": {
+      "zh": "温度随深度和时间的变化能提供什么证据？把水化放热、热传递与水泥强度区分开。",
+      "en": "What can temperature through depth and time tell us? Separate hydration heat, heat transfer, and cement strength."
+    }
+  }
+]
