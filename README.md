@@ -16,6 +16,8 @@
 
 基础原理页“深入：三类散射”包含原创频率—强度示意谱。绘图源为 `tools/build_scattering_spectrum.py`，中英文 SVG/PNG 在 `knowledge/diagrams/scattering-spectrum-*`；频率轴用断轴区分 GHz/THz，峰高和线宽为可视化示意，不是实测或定量强度比。图件参数、来源及验证边界保存在 `scattering-spectrum.json`。该图使用确定性 Matplotlib 绘制，无现场数据、生成图像或 PDF。
 
+公式使用本地 KaTeX 0.19.0 渲染，脚本、CSS 和字体在 `knowledge/vendor/katex/`，没有外部 CDN 依赖。DAS 完整支路推导及符号约定来自原稿，保存在 `knowledge/atlases/das/derivations.json`；DTS/DSS 与元件公式的显式 TeX 对照在 `tools/math_content.py`。网页保留分点说明，完整公式在每条实现的技术细节中展开。长公式在窄屏内横向滚动。
+
 ## 编辑和构建
 
 修改 `tools/atlas_content.py` 中的内容，运行：

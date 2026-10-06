@@ -58,8 +58,9 @@ def prepare_das_assets():
     return comps
 
 def notes_html(kind,routes,comps,references,shell,bi,esc):
+    from web_math import das_details,step_math,component_math,add_math_assets,rich_bi
     intro=INTRO[kind]
-    def point(label,zh,enlabel,en):return '<li><strong>'+bi(label,enlabel)+'</strong><span>'+bi(zh,en)+'</span></li>'
+    def point(label,zh,enlabel,en):return '<li><strong>'+bi(label,enlabel)+'</strong>'+rich_bi(zh,en)+'</li>'
     def heading(id,num,zh,en):return f'<h2 id="{id}"><small>{num}</small>'+bi(zh,en)+'</h2>'
     body='<section class="article-hero"><div class="breadcrumbs"><a href="index.html">'+bi('知识','Knowledge')+'</a> / '+kind.upper()+'</div>'+bi('分布式光纤传感 · 原理说明','DISTRIBUTED FIBER-OPTIC SENSING · PRINCIPLES',attrs='class="eyebrow"')+bi(intro['title'],intro['en'],'h1')+bi(intro['lead'],intro['lead_en'],'p','class="lede"')+'</section>'
     body+='<nav class="notes-toc" aria-label="Page contents">'+''.join(f'<a href="#{id}">'+bi(zh,en)+'</a>' for id,zh,en in [('measure','测量什么','Measurement'),('chain','测量过程','Acquisition'),('routes','实现方式','Implementations'),('components','元件作用','Components'),('limits','解释边界','Limits'),('sources','参考来源','Sources')])+'</nav><div class="point-notes">'
@@ -70,15 +71,21 @@ def notes_html(kind,routes,comps,references,shell,bi,esc):
     body+='</ol>'+heading('routes','03','代表性实现方式','Representative implementations')+'<p>'+bi('每一种方式分别说明测量机制、直接观测与适用条件。光路示意和关键公式可按需展开。','Each implementation states its mechanism, observable, and conditions. Expand schematics and key equations as needed.')+'</p><nav class="route-index" aria-label="Implementations">'
     for r in routes:body+=f'<a href="#{r["id"]}"><span>{r["id"][-2:]}</span>'+bi(r['name'],r['en'])+'</a>'
     body+='</nav>'
+    if kind=='das':
+        body+='<details class="formula-conventions"><summary>'+bi('统一符号、器件变换与相位约定','Symbols, component transforms & phase convention')+'</summary>'+das_details('conventions')+'</details>'
     for r in routes:
         body+=f'<article class="point-route" id="{r["id"]}"><h3><small>{r["id"][-2:]}</small>'+bi(r['name'],r['en'])+'</h3><ul class="explanation-points">'+point('工作方式',r['summary'],'How it works',r['sum_en'])+point('直接观测',r['observable'],'Observable',r['obs_en'])+point('适用条件与局限',r['limits'],'Conditions and limits',r['limits_en'])+'</ul>'
         fig=r.get('figure',f'atlases/{kind}/figures/{r["id"]}.svg')
-        body+='<details class="note-detail"><summary>'+bi('代表性光路与关键公式','Representative path & key equations')+'</summary><figure class="route-figure"><img src="'+fig+'" alt="'+esc(r['name'])+'" data-alt-zh="'+esc(r['name'])+'" data-alt-en="'+esc(r['en'])+'" loading="lazy"><figcaption>'+bi('概念示意，非按比例、非实测数据。','Conceptual, not to scale, not measured data.')+'</figcaption></figure><ol class="point-formulas">'
-        for s in r['steps']:
-            body+='<li><strong>'+esc(s['label'])+'</strong><div class="equation">'+esc(s['equation'])+'</div>'
-            if s['zh']:body+=bi(s['zh'],s['en'],'p')
-            body+='</li>'
-        body+='</ol></details><p class="point-source">'+bi('依据：','Sources: ')
+        body+='<details class="note-detail"><summary>'+bi('代表性光路与完整公式','Representative path & complete equations')+'</summary><figure class="route-figure"><img src="'+fig+'" alt="'+esc(r['name'])+'" data-alt-zh="'+esc(r['name'])+'" data-alt-en="'+esc(r['en'])+'" loading="lazy"><figcaption>'+bi('概念示意，非按比例、非实测数据。','Conceptual, not to scale, not measured data.')+'</figcaption></figure>'
+        if kind=='das':body+=das_details(r['id'])
+        else:
+            body+='<ol class="point-formulas">'
+            for s in r['steps']:
+                body+='<li><strong>'+esc(s['label'])+'</strong>'+step_math(s['equation'])
+                if s['zh']:body+=rich_bi(s['zh'],s['en'],'p')
+                body+='</li>'
+            body+='</ol>'
+        body+='</details><p class="point-source">'+bi('依据：','Sources: ')
         for k in r['refs']:body+='<a href="'+esc(references[k]['url'])+'" target="_blank" rel="noopener noreferrer">'+esc(references[k]['title'].split('. ')[0])+'</a> '
         body+='</p></article>'
     body+=heading('components','04','主要元件：各自起什么作用','What the components do')+'<ul class="explanation-points">'
@@ -88,7 +95,7 @@ def notes_html(kind,routes,comps,references,shell,bi,esc):
     for v in comps:
         isphoto=v['image_kind']=='manufacturer_photo'
         body+='<article><h3>'+v['id']+' · '+bi(v['name'],v.get('en',v['abbr']))+'</h3><img loading="lazy" src="atlases/'+v['asset']+'" alt="'+esc(v['name'])+'"><ul><li>'+bi(v['role'],v.get('role_en','Role in the representative optical branch.'))+'</li>'
-        if v.get('eq') and not ('\\' in v['eq']):body+='<li class="component-equation">'+esc(v['eq'])+'</li>'
+        if v.get('eq'):body+='<li>'+component_math(v)+'</li>'
         body+='</ul><small>'+bi('厂家外观示例；须核对实际规格。' if isphoto else '原创功能示意，不是实物照片。','Manufacturer appearance example; check actual specifications.' if isphoto else 'Original functional schematic, not a product photo.')+'</small>'
         if v.get('source_url'):body+='<a href="'+esc(v['source_url'])+'" target="_blank" rel="noopener noreferrer">'+bi('厂家来源 ↗','Manufacturer source ↗')+'</a>'
         body+='</article>'
@@ -99,9 +106,11 @@ def notes_html(kind,routes,comps,references,shell,bi,esc):
     body+='</ul>'+heading('sources','06','参考来源','Sources')+'<ol class="references">'
     for k in dict.fromkeys(k for r in routes for k in r['refs']):body+='<li><a href="'+esc(references[k]['url'])+'" target="_blank" rel="noopener noreferrer">'+esc(references[k]['title'])+'</a></li>'
     body+='</ol><div class="notes-related">'+bi('继续阅读：','Continue: ')+''.join('<a href="'+k+'-optical-atlas.html">'+k.upper()+'</a>' for k in ['das','dts','dss'] if k!=kind)+'</div></div>'
-    return shell(intro['title'],intro['en'],body)
+    return add_math_assets(shell(intro['title'],intro['en'],body))
 
 def refresh_notes():
+    from web_math import cache_das_derivations,validate_local_equations,upgrade_basic_principles
+    cache_das_derivations();validate_local_equations()
     from build_sensing_atlases import shell,bi,esc,OUT,make_components
     from atlas_content import DTS,DSS,REFERENCES
     comps=make_components()
@@ -124,6 +133,7 @@ def refresh_notes():
         for old,new in replaces.items():s=s.replace(old,new)
         p.write_text(s,encoding='utf-8')
     install_instrument_section()
+    upgrade_basic_principles()
     print('Updated point-by-point DAS/DTS/DSS Knowledge pages; no PDF or package entry links.')
 
 def install_instrument_section():
