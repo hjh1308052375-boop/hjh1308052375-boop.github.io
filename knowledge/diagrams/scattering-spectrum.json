@@ -1,0 +1,42 @@
+{
+  "purpose": "Teach the positions of Rayleigh, Brillouin and Raman scattering on an increasing optical-frequency axis",
+  "type": "original conceptual spectrum, no measured data",
+  "x_axis": "optical frequency ν; three frequency-offset windows with explicit breaks",
+  "y_axis": "illustrative relative intensity; heights independently schematic, no inferred physical ratios",
+  "profiles": "Gaussian teaching profiles, not measured line shapes",
+  "frequency_windows_THz_relative_to_nu0": [
+    [
+      -19,
+      -5
+    ],
+    [
+      -0.035,
+      0.035
+    ],
+    [
+      5,
+      19
+    ]
+  ],
+  "illustrative_centers_THz": [
+    -13,
+    -0.011,
+    0,
+    0.011,
+    13
+  ],
+  "height_and_linewidth_policy": "not quantitative; Stokes/anti-Stokes asymmetry only illustrates possible thermal asymmetry, not fixed ratio",
+  "source": "tools/build_scattering_spectrum.py",
+  "outputs": [
+    "scattering-spectrum-zh.svg",
+    "scattering-spectrum-en.svg",
+    "scattering-spectrum-zh.png",
+    "scattering-spectrum-en.png"
+  ],
+  "references": [
+    "https://doi.org/10.3390/s120708601",
+    "https://www.epfl.ch/labs/gfo/page-60916-en-html/page-61501-en-html/distributed-brillouin-fibre-sensing/"
+  ],
+  "dead_water_alignment": "checked/not required: no field data",
+  "date": "2026-10-06"
+}
