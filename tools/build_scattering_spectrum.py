@@ -13,7 +13,7 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'knowledge'/'diagrams'
 FONT=FontProperties(fname='C:/Windows/Fonts/msyh.ttc')
-plt.rcParams.update({'svg.fonttype':'path','font.size':13,'axes.linewidth':1.15})
+plt.rcParams.update({'svg.fonttype':'path','svg.hashsalt':'scattering-spectrum-v1','font.size':13,'axes.linewidth':1.15})
 BLUE='#1765ad'; ORANGE='#c36524'; PURPLE='#7b4db1'; INK='#122d40'; MUTED='#566b79'
 
 def draw(lang):
@@ -59,7 +59,9 @@ def draw(lang):
     fig.text(.095,.082,'断轴区分 GHz / THz 尺度；峰高与线宽仅作示意，不代表实测或真实强度比。' if zh else 'Axis breaks separate GHz / THz scales; heights and linewidths are illustrative, not measured ratios.',fontproperties=FONT,fontsize=11,color=MUTED)
     fig.text(.095,.034,r'$\nu_0$：入射光频率  ·  $\nu_B$：布里渊频移  ·  $\nu_R$：拉曼频移' if zh else r'$\nu_0$: incident frequency  ·  $\nu_B$: Brillouin shift  ·  $\nu_R$: Raman shift',fontproperties=FONT,fontsize=11,color=MUTED)
     dest=OUT/('scattering-spectrum-'+lang)
-    fig.savefig(dest.with_suffix('.svg'),facecolor='white')
+    svg=dest.with_suffix('.svg')
+    fig.savefig(svg,facecolor='white',metadata={'Date':None})
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text(encoding='utf-8').splitlines())+'\n',encoding='utf-8')
     fig.savefig(dest.with_suffix('.png'),dpi=170,facecolor='white')
     plt.close(fig)
 
