@@ -1,0 +1,1343 @@
+[
+  {
+    "key": "nll",
+    "name": "窄线宽激光器",
+    "abbr": "NLL",
+    "maker": "Chilas",
+    "model": "CF3 1550 nm 蝶形封装",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "role": "提供高相干性的连续光，作为脉冲探测光和同源本振；线宽与频率噪声影响相位测量。",
+    "note": "裸封装需电流驱动、TEC 温控及配套安装座。",
+    "eq": "E_0(u)=\\sqrt{P_0}e^{i[\\omega_0u+\\phi_L(u)]}",
+    "id": "C01",
+    "page": 1,
+    "photo": {
+      "page": "https://chilasbv.com/chilas-cf3-1550-nm/",
+      "image_url": "https://chilasbv.com/wp-content/uploads/2025/07/Chilas-CF3-butterfly-packaged-laser.webp",
+      "size": [
+        768,
+        432
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        584,
+        430
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "31665b755cc2bbf961b8a76a9907ca19cfd2ae7134094955165dcd2614ebdf90",
+      "asset_sha256": "c15ca4205a5ced2ce2bd2163bb21e623d27bd692c7fe73e2c0135e37bdf03bcf"
+    },
+    "asset": "DAS_元件实物图片/C01.png"
+  },
+  {
+    "key": "ld",
+    "name": "可电流调谐激光二极管",
+    "abbr": "LD",
+    "maker": "AeroDIODE",
+    "model": "1550 nm DFB 蝶形激光系列",
+    "routes": [
+      7
+    ],
+    "role": "电流调制使光频在一个脉冲内连续变化，生成 CP-φ-OTDR 所需的啁啾光。",
+    "note": "图片代表封装；啁啾斜率、线性度与动态调谐带宽需实测标定。",
+    "eq": "E(u)=\\sqrt{P(u)}e^{i\\int_0^u2\\pi\\nu(s)\\,ds}",
+    "id": "C02",
+    "page": 1,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/1550-nm-laser-diode/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2020/05/1550-nm-laser-diode-2.jpg",
+      "size": [
+        986,
+        752
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        36,
+        60,
+        857,
+        723
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "be6309dd8022690f79fe19dde46f6ff66456781f72268f78cb4b84bd1904fb2e",
+      "asset_sha256": "38b02e1e095a90a5bc488c482f327f65c392d6b3359ec23efad7a093acb45fce"
+    },
+    "asset": "DAS_元件实物图片/C02.png"
+  },
+  {
+    "key": "tls",
+    "name": "扫频可调谐激光器",
+    "abbr": "TLS",
+    "maker": "Santec",
+    "model": "TSL-570；内置扫频控制",
+    "routes": [
+      9
+    ],
+    "role": "连续扫描光频；回波与参考光产生距离相关的拍频，用于相干 OFDR。",
+    "note": "扫频控制器可集成在整机中；辅助 MZI 校正实际扫频非线性。",
+    "eq": "\\nu(u)=\\nu_0+\\kappa u",
+    "id": "C03",
+    "page": 1,
+    "photo": {
+      "page": "https://inst.santec.com/products/test-and-measurement/tunablelaser",
+      "image_url": "https://santec-inst.transforms.svdcdn.com/production/product-images/Japan/TSL-570_A.png?w=363&h=242&q=80&fm=png&fit=crop&dm=1768835583&s=7b53e54b280f26da58159b5bada910e7",
+      "size": [
+        363,
+        242
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        19,
+        26,
+        339,
+        217
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "34648dbb2c183ea6226fbc9f51715c91e0986822700f9b220de38c0d547eefbe",
+      "asset_sha256": "6cce8455cd23e77f1906f061cce834b63212d8c73142e5c2d2516544e4a9017d"
+    },
+    "asset": "DAS_元件实物图片/C03.png"
+  },
+  {
+    "key": "iso",
+    "name": "光隔离器",
+    "abbr": "ISO",
+    "maker": "DK Photonics",
+    "model": "1550 nm 非偏振相关隔离器",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "允许指定方向传光，抑制反射光返回激光器；路线 5 的接收 ISO 也抑制干涉仪回返。",
+    "note": "有方向性；图中的箭头需与实物安装方向一致。",
+    "eq": "B_{\\to}=t_fB_{\\rm in},\\quad |t_b|^2\\ll|t_f|^2",
+    "id": "C04",
+    "page": 1,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/1550nm-polarization-insensitive-isolator.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/ISO-1X1-bare-fiber-1024x640.png",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        154,
+        1024,
+        561
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "54ed07310c5613a859139c5b97404505d86ede2878da86555770f63fd85caeb2",
+      "asset_sha256": "1bd8285d139841192cc5020d8d87b4527811ce3ae89fa442960869ae87919bb6"
+    },
+    "asset": "DAS_元件实物图片/C04.png"
+  },
+  {
+    "key": "splitter",
+    "name": "1×2 分光耦合器",
+    "abbr": "OC",
+    "maker": "AC Photonics",
+    "model": "1×2 单模熔融耦合器",
+    "routes": [
+      2,
+      3,
+      4,
+      6,
+      9
+    ],
+    "role": "把同一激光分成探测/本振、两脉冲臂、延迟干涉臂或扫频辅助支路。",
+    "note": "分光比决定各支路功率；1×2 器件为三端口。",
+    "eq": "B_1=s_1B_0,\\ B_2=s_2B_0",
+    "id": "C05",
+    "page": 2,
+    "photo": {
+      "page": "https://acphotonics.com/1x2-and-2x2-single-mode-fused-coupler",
+      "image_url": "https://acphotonics.com/image/cache/catalog/product/Singlemode_Dual_Window_Couplers_54_1-500x500.png",
+      "size": [
+        500,
+        500
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        160,
+        500,
+        350
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "b964e2832495615bc2f8b893a54644267d4b20dbf76334b21874252a20ba6120",
+      "asset_sha256": "afd902c0b781567f34a320cc5926a47c5cc6eb3521641d9052efc24c4e272dda"
+    },
+    "asset": "DAS_元件实物图片/C05.png"
+  },
+  {
+    "key": "coupler2_dk",
+    "name": "2×2 光纤耦合器",
+    "abbr": "2×2 OC",
+    "maker": "DK Photonics",
+    "model": "1550 nm PM 熔融耦合器",
+    "routes": [
+      2,
+      5,
+      6,
+      9
+    ],
+    "role": "将两路光相干合束，或把反射干涉仪回波送至接收端；两个输出可用于平衡探测。",
+    "note": "四端口；固定端口相位需按接线约定校准。",
+    "eq": "\\binom{B_+}{B_-}=\\frac{1}{\\sqrt2}\\binom{B_a+B_b}{B_a-B_b}",
+    "id": "C06",
+    "page": 2,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/pm-fused-coupler.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/2x2-pm-fiber-fused-coupler-1024x640.jpg",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        125,
+        1024,
+        537
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "20c9f5042e4d0b0baceb5d40f6845384fb31681a3346f2d5fcf2775cbd7bb3ab",
+      "asset_sha256": "3fc54a4b077e992d683333cb4278de63e7d72f1d5d5077198611e338b9c5fea6"
+    },
+    "asset": "DAS_元件实物图片/C06.png"
+  },
+  {
+    "key": "coupler3",
+    "name": "3×3 光纤耦合器",
+    "abbr": "3×3 OC",
+    "maker": "DK Photonics",
+    "model": "3×3 PM 熔融耦合器系列",
+    "routes": [
+      4
+    ],
+    "role": "让两路延迟回波产生三个相位错开的干涉输出，结合三只 PD 恢复相位。",
+    "note": "六端口；第三输入终止。实际分光比、相位差需校准。",
+    "eq": "B_k=(B_a+e^{i2\\pi k/3}B_b)/\\sqrt3",
+    "id": "C07",
+    "page": 2,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/1550nm-3x3-fused-pm-fiber-splitter.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/3x3-pm-fiber-fused-coupler.jpg",
+      "size": [
+        1600,
+        1000
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        75,
+        1600,
+        1000
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "09a4741dbd48f2ac51be018ebda607eff1a173852abd42bd326a941f2f3d042a",
+      "asset_sha256": "45c1337f075fc2969e9ae09618d1ef3da079af7e8863730d979907be94af2298"
+    },
+    "asset": "DAS_元件实物图片/C07.png"
+  },
+  {
+    "key": "cir",
+    "name": "三端口光环形器",
+    "abbr": "CIR",
+    "maker": "DK Photonics",
+    "model": "1550 nm 3-port PIOC",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "按 1→2、2→3 路由光信号，把发射光送进感测纤，再把瑞利回波送至接收链。",
+    "note": "三个尾纤的编号需对应光路图；环形器不同于隔离器。",
+    "eq": "B_2=t_{12}B_1,\\quad B_3=t_{23}B_{2,\\rm ret}",
+    "id": "C08",
+    "page": 2,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/1550nm-3-port-polarization-insensitive-optical-circulator.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/3-port-PIOC-fc-apc-1024x640.png",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        40,
+        1024,
+        566
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "08da554d6abd2229247d2e92f30f9665a8300344c8a57350dad93bc43cb692d5",
+      "asset_sha256": "942f37edfddbaae19e829540bf73d29e1a53e8addd844ec2f122aae113cfc07b"
+    },
+    "asset": "DAS_元件实物图片/C08.png"
+  },
+  {
+    "key": "edfa",
+    "name": "掺铒光纤放大器",
+    "abbr": "EDFA",
+    "maker": "Optilab",
+    "model": "C-band 双级台式 EDFA 系列",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "role": "提高探测脉冲功率，增加可用瑞利回波；同时引入 ASE，并存在增益饱和。",
+    "note": "图中表示发射放大；需要匹配峰值功率、平均功率与脉冲重复率。",
+    "eq": "B_{\\rm out}=\\sqrt G B_{\\rm in}+n_{\\rm ASE}",
+    "id": "C09",
+    "page": 3,
+    "photo": {
+      "page": "https://www.optilab.com/en-ca/products/dual-stage-erbium-doped-fiber-amplifier-c-band-benchtop",
+      "image_url": "https://www.optilab.com/cdn/shop/files/2_030882ad-dcb2-4b04-96e6-d0c4c0cce57d.png?v=1760593674",
+      "size": [
+        3245,
+        2168
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        290,
+        126,
+        3111,
+        2017
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "84b9852665ffb07f0c9c9bc3883af113745497f41ef881665b2379abefcc91b3",
+      "asset_sha256": "055959e91da95fc911125ceb00388a8697723b85e998124e15c8b1b1c9b1d9d4"
+    },
+    "asset": "DAS_元件实物图片/C09.png"
+  },
+  {
+    "key": "bpf",
+    "name": "光带通滤波器",
+    "abbr": "BPF",
+    "maker": "PriTel",
+    "model": "PM-TB-TWF 可调带通滤波器",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "role": "通过探测光频带并抑制 EDFA 带外 ASE；保留脉冲及频移所需的光谱宽度。",
+    "note": "不能把电学低通滤波器当作这里的光带通滤波器。",
+    "eq": "B_{\\rm out}=h_B*B_{\\rm in}",
+    "id": "C10",
+    "page": 3,
+    "photo": {
+      "page": "https://www.pritel.com/tbtwf.html",
+      "image_url": "https://www.pritel.com/images/TBTWF_small.gif",
+      "size": [
+        533,
+        200
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        533,
+        200
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "f1bc579dbafd709318fd74d0c962d7428f726a8aff7cd6a447f8409aa2951ad4",
+      "asset_sha256": "f1bc579dbafd709318fd74d0c962d7428f726a8aff7cd6a447f8409aa2951ad4"
+    },
+    "asset": "DAS_元件实物图片/C10.png"
+  },
+  {
+    "key": "aom",
+    "name": "光纤声光调制器",
+    "abbr": "AOM",
+    "maker": "AeroDIODE",
+    "model": "1550AOM 高速封装系列",
+    "routes": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "role": "通过 RF 驱动控制脉冲通断，同时使所选衍射级的光频发生偏移；双脉冲方案使用两只。",
+    "note": "照片为厂家产品外观图；需要配套 RF 驱动器。",
+    "eq": "B_{\\rm out}=a(u)e^{i[\\Omega u+\\theta_{\\rm RF}]}B_{\\rm in}",
+    "id": "C11",
+    "page": 3,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/fiber-coupled-aom/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2021/07/Fiber-coupled-AOM-model-2-front.jpg",
+      "size": [
+        1400,
+        1000
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        128,
+        1400,
+        865
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "1f445ee733bd8e0ecdc0bab6ff5c9b1e6d1609a146155065d364afa5148a6718",
+      "asset_sha256": "d2538c0ea871b2ae6000e5e2dc2daf4d3f1d0477b6cd5aff80882f5dcdef1df1"
+    },
+    "asset": "DAS_元件实物图片/C11.png"
+  },
+  {
+    "key": "im",
+    "name": "电光强度调制器",
+    "abbr": "IM / MZM",
+    "maker": "Exail",
+    "model": "LiNbO3 强度调制器系列",
+    "routes": [
+      3,
+      8
+    ],
+    "role": "利用 Mach-Zehnder 电光干涉把连续光切成脉冲；需控制 RF 电压与直流偏置。",
+    "note": "工作点决定消光比；理想式忽略插损与残余啁啾。",
+    "eq": "B_{\\rm out}=B_{\\rm in}\\cos\\frac{\\pi[V_b+V(u)]}{2V_\\pi}",
+    "id": "C12",
+    "page": 3,
+    "photo": {
+      "page": "https://www.exail.com/index.php/fr/product/linbo3-intensity-modulators-photonics",
+      "image_url": "https://www.exail.com/media/7912/exail-produits-linbo3-intensity-modulators_2835x975.png",
+      "size": [
+        2835,
+        975
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        87,
+        2835,
+        797
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "952dc6205ec84f018d019ffba36863ddccadd63025d750549a195c2c9968c220",
+      "asset_sha256": "6365c079279e5f464ff23966e57f535311e32e1dbd791f1fa389f673e99f3dda"
+    },
+    "asset": "DAS_元件实物图片/C12.png"
+  },
+  {
+    "key": "iq",
+    "name": "IQ / 双平行 MZ 调制器",
+    "abbr": "SSB-EOM",
+    "maker": "Exail",
+    "model": "MXIQER-LN-30",
+    "routes": [
+      8
+    ],
+    "role": "用正交 RF 驱动和合适偏置抑制载波/一侧边带，实现光学单边带频移。",
+    "note": "SSB 是工作方式；对应实物为 IQ / DPMZM，而非一个软件盒。",
+    "eq": "B_{\\rm out}\\simeq a_s e^{i2\\pi f_m u}B_{\\rm in}",
+    "id": "C13",
+    "page": 4,
+    "photo": {
+      "page": "https://www.exail.com/news/unlocking-qkd-potential-with-optical-iq-modulator",
+      "image_url": "https://www.exail.com/media/9005/mxiqerln30-exail_2835x553.png",
+      "size": [
+        2835,
+        553
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        2835,
+        553
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "c4e99e3db1e0f4636daad987be459a20ba0e8e3481c3cbde7243e36926ec32ba",
+      "asset_sha256": "566cfffd1ee4c6bb2d777c06720315d974d9a9a6b59ebe9f9c29a4db9f6a05e6"
+    },
+    "asset": "DAS_元件实物图片/C13.png"
+  },
+  {
+    "key": "pm",
+    "name": "电光相位调制器",
+    "abbr": "PM",
+    "maker": "Exail",
+    "model": "LiNbO3 相位调制器系列",
+    "routes": [
+      5
+    ],
+    "role": "在 Michelson 干涉臂上施加已知相位载频，以 PGC 谐波解调提取声波相位。",
+    "note": "反射臂会两次经过 PM；有效调制深度需包括去、回时延。",
+    "eq": "B_{\\rm out}=e^{i\\pi V(u)/V_\\pi}B_{\\rm in}",
+    "id": "C14",
+    "page": 4,
+    "photo": {
+      "page": "https://www.exail.com/product/linbo3-phase-modulators-photonics",
+      "image_url": "https://www.exail.com/media/10479/exail-produit-linbo3-phase-modulators_804x154.png",
+      "size": [
+        804,
+        154
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        804,
+        154
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "d23341a9e98c862eceef9457f15758402de464a5b70703bd94cb7b77c4bc47b7",
+      "asset_sha256": "d23341a9e98c862eceef9457f15758402de464a5b70703bd94cb7b77c4bc47b7"
+    },
+    "asset": "DAS_元件实物图片/C14.png"
+  },
+  {
+    "key": "soa",
+    "name": "半导体光放大器",
+    "abbr": "SOA",
+    "maker": "AeroDIODE",
+    "model": "1550SOA 蝶形封装系列",
+    "routes": [
+      7
+    ],
+    "role": "由脉冲电流改变增益，门控啁啾连续光并放大脉冲，保留其频率扫描信息。",
+    "note": "器件与驱动器分别展示；ASE、饱和和载流子动力学在理想式中省略。",
+    "eq": "B_{\\rm out}\\simeq\\sqrt{G[I(u)]}\\,p(u)B_{\\rm in}",
+    "id": "C15",
+    "page": 4,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/semiconductor-optical-amplifier/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2026/08/SOA-butterfly-1550nm.jpg",
+      "size": [
+        768,
+        478
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        54,
+        768,
+        478
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "2234704ea3d2d714093f093c1215f4e4dbb7fabbb642e1b29b416668d56f4f05",
+      "asset_sha256": "c57cb19424e36344144588bb3f044baf3205eaf54cb88ffd76c8f82af6c6effb"
+    },
+    "asset": "DAS_元件实物图片/C15.png"
+  },
+  {
+    "key": "soa_driver",
+    "name": "SOA 脉冲电流驱动器",
+    "abbr": "SOA driver",
+    "maker": "AeroDIODE",
+    "model": "SOA-std 开放式驱动系列",
+    "routes": [
+      7
+    ],
+    "role": "向 SOA 注入同步的短电流脉冲；设定脉宽、重复率、峰值电流与温度。",
+    "note": "图片为 SOA 与开放式驱动板组合；外部 AWG / TTL 提供触发。",
+    "eq": "I_{\\rm SOA}(u)=I_{\\rm off}+\\Delta I\\,p(u)",
+    "id": "C16",
+    "page": 4,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/soa-pulsed-driver/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2022/08/Semiconductor-optical-amplifier-SOA-std.jpg",
+      "size": [
+        1024,
+        768
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        56,
+        0,
+        968,
+        768
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "e0ce66329100464451cd60553288fffc52c3a9fb9f0f64ae801b3fecede2044d",
+      "asset_sha256": "5951458d57a501ca504a2e01e966d0485e2cc6f9dcabfc97c1e68f87456c51dc"
+    },
+    "asset": "DAS_元件实物图片/C16.png"
+  },
+  {
+    "key": "pc",
+    "name": "偏振控制器",
+    "abbr": "PC",
+    "maker": "DK Photonics",
+    "model": "3PPC560 三环手动控制器",
+    "routes": [
+      2,
+      3
+    ],
+    "role": "调节本振或信号的偏振，使两路电场有充分重叠，改善相干接收干涉可见度。",
+    "note": "这里 PC 指 Polarization Controller；需把光纤绕入三环。",
+    "eq": "\\boldsymbol B_{\\rm out}=\\mathbf J_{\\rm PC}\\boldsymbol B_{\\rm in}",
+    "id": "C17",
+    "page": 5,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/3-paddle-manual-polarization-controllers-56-mm-loop.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/3-paddle-manual-polarization-controllers-56-mm-loop-2-1024x640.png",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        91,
+        81,
+        949,
+        569
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "5a75546cfa03cbfd789a339d1b68c45de25f6585a31f887d5feb6fae60dc93f6",
+      "asset_sha256": "f72905a962b5bddacaeb86264c3135fd31dec2a18513c225c9ea124e18bc81ae"
+    },
+    "asset": "DAS_元件实物图片/C17.png"
+  },
+  {
+    "key": "voa",
+    "name": "可变光衰减器",
+    "abbr": "VOA",
+    "maker": "DK Photonics",
+    "model": "1550 nm 机械式 VOA",
+    "routes": [
+      2,
+      3
+    ],
+    "role": "调节本振光功率，平衡信号与本振并避免接收器饱和；也便于调试功率预算。",
+    "note": "A_dB 为功率衰减量；场幅衰减使用 20 作分母。",
+    "eq": "B_{\\rm out}=10^{-A_{\\rm dB}/20}B_{\\rm in}",
+    "id": "C18",
+    "page": 5,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/1550nm-single-mode-mechanical-variable-optical-attenuator.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/voa-standard-size-1024x640.png",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        139,
+        1024,
+        455
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "75387a1b2abeec945de399eade2b155dcd663cf2f44d675d8a85a38c4498614d",
+      "asset_sha256": "c41cadefb09df05628e83b82b1782218048e8724f8bdd641266720ae964c3d98"
+    },
+    "asset": "DAS_元件实物图片/C18.png"
+  },
+  {
+    "key": "frm",
+    "name": "法拉第旋转镜",
+    "abbr": "FRM",
+    "maker": "DK Photonics",
+    "model": "1550 nm Faraday mirror",
+    "routes": [
+      5
+    ],
+    "role": "反射回光并产生约 90° 的往返偏振旋转，补偿理想互易光纤臂的偏振扰动。",
+    "note": "J 为单程 Jones 矩阵，F 为理想 FRM 矩阵。两只 FRM 分别位于长、短反射臂末端。",
+    "eq": "\\mathbf J^{\\mathsf T}\\mathbf F\\mathbf J=(\\det\\mathbf J)\\mathbf F",
+    "id": "C19",
+    "page": 5,
+    "photo": {
+      "page": "https://www.dkphotonics.com/product/1550nm-faraday-mirror.html",
+      "image_url": "https://www.dkphotonics.com/wp-content/uploads/FM-5.5x35-fp-1024x640.png",
+      "size": [
+        1024,
+        640
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        79,
+        51,
+        986,
+        561
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "1cc61068cb105366c18b5730515e5290fd1118af676e181c5bd70a555d339a4a",
+      "asset_sha256": "74b853fc21ffb0d957dad16abfb3047daa6418a293b921f707f691d914b58444"
+    },
+    "asset": "DAS_元件实物图片/C19.png"
+  },
+  {
+    "key": "hybrid",
+    "name": "90° 光学混频器",
+    "abbr": "90° hybrid",
+    "maker": "Optoplex",
+    "model": "90Degree Optical Hybrid",
+    "routes": [
+      3
+    ],
+    "role": "把回波与本振混合，得到 I+、I-、Q+、Q- 四个光学输出，供两对平衡探测。",
+    "note": "照片中硬币为厂家尺寸参照；混频器本身不等于 ADC 或数字 I/Q。",
+    "eq": "B_{I\\pm}=(B_s\\pm B_L)/2,\\quad B_{Q\\pm}=(B_s\\pm iB_L)/2",
+    "id": "C20",
+    "page": 5,
+    "photo": {
+      "page": "https://www.optoplex.com/Optical_Hybrid.htm",
+      "image_url": "https://www.optoplex.com/images/product/90Degree_Optical_Hybrid.png",
+      "size": [
+        396,
+        296
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        25,
+        0,
+        331,
+        296
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "5713163536c4ded35b94d02d92aa0f4274cb1ede32b918f0363e652fbd46806a",
+      "asset_sha256": "944effe893a7304578d515fcc60b7a5395bd2e6a5fbd9c35fd660fb71a37d11c"
+    },
+    "asset": "DAS_元件实物图片/C20.png"
+  },
+  {
+    "key": "fiber",
+    "name": "感测光纤 / 光缆",
+    "abbr": "Sensing fiber",
+    "maker": "AFW Technologies",
+    "model": "SMF 光纤盘产品系列",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "沿纤产生连续分布的瑞利散射；声波引起轴向应变与光程变化，编码进回波。",
+    "note": "照片展示实验室光纤盘；现场应使用合适封装与机械耦合的感测光缆。",
+    "eq": "B_{\\rm bs}(u,T)=\\mathcal H_T[B_p](u)",
+    "id": "C21",
+    "page": 6,
+    "photo": {
+      "page": "https://www.afwtechnologies.com.au/delay_lines.html",
+      "image_url": "https://www.afwtechnologies.com.au/images/3%20Reels-1.jpg",
+      "size": [
+        478,
+        460
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        478,
+        460
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "8df7f0f68b4bbbcaf7f559945e4d1b6cdd3341349bd9e61939140a5895338fc6",
+      "asset_sha256": "8df7f0f68b4bbbcaf7f559945e4d1b6cdd3341349bd9e61939140a5895338fc6"
+    },
+    "asset": "DAS_元件实物图片/C21.png"
+  },
+  {
+    "key": "delay",
+    "name": "延迟 / 参考光纤",
+    "abbr": "Delay fiber",
+    "maker": "AFW Technologies",
+    "model": "SM1 光纤延迟盒系列",
+    "routes": [
+      4,
+      5,
+      9
+    ],
+    "role": "建立干涉臂时延差，或设置 OFDR 参考与辅助 MZI 时延；它不承担现场声波感测。",
+    "note": "ΔL 是单程物理臂长差；Michelson 往返光程差为两倍。",
+    "eq": "\\Delta\\tau_{\\rm MZI}=n_g\\Delta L/c,\\quad\\Delta\\tau_{\\rm MI}=2n_g\\Delta L/c",
+    "id": "C22",
+    "page": 6,
+    "photo": {
+      "page": "https://www.afwtechnologies.com.au/delay_lines.html",
+      "image_url": "https://www.afwtechnologies.com.au/images/box-1000m-smaller.jpg",
+      "size": [
+        472,
+        328
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        26,
+        469,
+        328
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "e6e36b938201704f8624feb1e6eac9b15ed7721eafab4e63d8cf2ecf27a3354b",
+      "asset_sha256": "909091e5dcadc72d6a1bcfa5c7bba39aa12949c3aae68cc457ffba7b8b7cafd6"
+    },
+    "asset": "DAS_元件实物图片/C22.png"
+  },
+  {
+    "key": "patch",
+    "name": "光纤跳线与连接器",
+    "abbr": "FC/APC",
+    "maker": "AFW Technologies",
+    "model": "FC/APC 单模跳线",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "连接器件间光路；APC 斜面端接有助于降低反射，PM 支路还需匹配偏振轴。",
+    "note": "APC 与 UPC 不应直接混接；裸尾纤方案可以熔接代替接头。",
+    "eq": "B_{\\rm out}=t_c e^{-i\\omega_0\\tau_c}B_{\\rm in}(u-\\tau_c)",
+    "id": "C23",
+    "page": 6,
+    "photo": {
+      "page": "https://www.afwtechnologies.com.au/patchcord.html",
+      "image_url": "https://www.afwtechnologies.com.au/images/patchcordfca.jpg",
+      "size": [
+        538,
+        378
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        538,
+        378
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "bae19a3d274aeff8d2e4b45d66c6e7e5df6d2405cf7cedece745923c3acb31b0",
+      "asset_sha256": "bae19a3d274aeff8d2e4b45d66c6e7e5df6d2405cf7cedece745923c3acb31b0"
+    },
+    "asset": "DAS_元件实物图片/C23.png"
+  },
+  {
+    "key": "terminal",
+    "name": "低反射光纤终端",
+    "abbr": "Terminator",
+    "maker": "Fibertronics",
+    "model": "FT-TRM-231 FC/APC",
+    "routes": [
+      4,
+      9
+    ],
+    "role": "吸收未使用端口的光，抑制额外反射和寄生干涉；感测纤末端也可采用低反射处理。",
+    "note": "不向终止输入端注入独立光场；图中终端不是 FRM。",
+    "eq": "B_{\\rm ret}=r_tB_{\\rm in},\\quad |r_t|^2\\ll1",
+    "id": "C24",
+    "page": 6,
+    "photo": {
+      "page": "https://fibertronics.com/fcapc-terminator",
+      "image_url": "https://www.fibertronics.com/site/FT-TRM-231_00.default.png",
+      "size": [
+        800,
+        667
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        58,
+        171,
+        709,
+        481
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "fd9548b1fcd4064e9fd68cb0d31dbf19da16e2f701fc3f7d561083541c114d5a",
+      "asset_sha256": "40a7cd431ac525a3bc28fa674a8ff76109298194d5fc928fe2d8b3b1c3997315"
+    },
+    "asset": "DAS_元件实物图片/C24.png"
+  },
+  {
+    "key": "pd",
+    "name": "单通道光电接收器",
+    "abbr": "PD + TIA",
+    "maker": "Optilab",
+    "model": "HPR-IG InGaAs 接收器系列",
+    "routes": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "将光功率转换为电流，再由跨阻放大器转换为采样电压；路线 9 用于辅助 MZI。",
+    "note": "路线 4 需要三通道同步采样；照片为厂家 HPR 产品页配图。",
+    "eq": "i(u)=\\mathcal R|B(u)|^2,\\quad V=Z_T*i",
+    "id": "C25",
+    "page": 7,
+    "photo": {
+      "page": "https://www.optilab.com/products/100-mhz-high-gain-ingaas-photoreceiver-module",
+      "image_url": "https://www.optilab.com/cdn/shop/files/HPR.png?v=1760515607",
+      "size": [
+        3097,
+        2648
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        145,
+        175,
+        2809,
+        2440
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "9cedb28b7fc7a7ed93ad772db09aa8b07e9af3955107338c2a7647a585cbf05b",
+      "asset_sha256": "9e9850fed7cf6ef9c070c7838386c4242d02d2318b9f86e245e849dec18e599a"
+    },
+    "asset": "DAS_元件实物图片/C25.png"
+  },
+  {
+    "key": "bpd",
+    "name": "平衡光电接收器",
+    "abbr": "BPD",
+    "maker": "Optoplex",
+    "model": "BR-C0100B1DC",
+    "routes": [
+      2,
+      3,
+      9
+    ],
+    "role": "两只 PD 对两个光学输出分别探测后相减，提取干涉项并抑制共模强度成分。",
+    "note": "路线 3 的 I、Q 各需要一对；共模抑制依赖响应与增益匹配。",
+    "eq": "i_d=\\mathcal R(|B_+|^2-|B_-|^2)",
+    "id": "C26",
+    "page": 7,
+    "photo": {
+      "page": "https://www.optoplex.com/Balanced_Photo-Receivers.htm",
+      "image_url": "https://www.optoplex.com/images/Balanced_PD_BR-C0100B1DC.jpg",
+      "size": [
+        3137,
+        2385
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        3137,
+        2385
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "13e3f4ed93de3fb2114d5c269cc643c53f61887b859adbd684d5a51d58f310b1",
+      "asset_sha256": "19ca991ecf8defbb504d49924cac3977a1318c360425d17d417207f1582cace9"
+    },
+    "asset": "DAS_元件实物图片/C26.png"
+  },
+  {
+    "key": "adc",
+    "name": "高速数据采集卡",
+    "abbr": "ADC / DAQ",
+    "maker": "AlazarTech",
+    "model": "ATS9440 四通道 PCIe 卡",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "把探测器电压离散采样，形成每次迹线/扫描的数据，送往计算与存储单元。",
+    "note": "照片仅作硬件识别；采样率、模拟带宽、位数和通道数需按方案确定。",
+    "eq": "x[n,T]=Q\\{V(n/f_s,T)\\}",
+    "id": "C27",
+    "page": 7,
+    "photo": {
+      "page": "https://www.alazartech.com/en/product/ats9440/16/",
+      "image_url": "https://www.alazartech.com/LowCal/Resources/static/images/uploads/originals/products/16/6/6445ATS9440AlazarTech.jpg",
+      "size": [
+        360,
+        288
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        25,
+        0,
+        334,
+        288
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "35c3552500237342f287d7c7fd8da18ac43ec91620ab92fa8ce59d5b73b91a99",
+      "asset_sha256": "de6184477ab0085cb633cbb8b2e6b80e80f2d6328285ba42337965d72977f05e"
+    },
+    "asset": "DAS_元件实物图片/C27.png"
+  },
+  {
+    "key": "awg",
+    "name": "脉冲 / 任意波形发生器",
+    "abbr": "AWG",
+    "maker": "RIGOL",
+    "model": "DG5000 系列",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "role": "产生门控、触发、啁啾电压或 PM 载频；同步发射时序和数据采集。",
+    "note": "一个系统可由多通道 AWG / FPGA 集成实现，图中分开的电框不一定各占一台。",
+    "eq": "V_{\\rm drive}(u)=V_0a(u),\\quad t_m=mT_{\\rm rep}",
+    "id": "C28",
+    "page": 7,
+    "photo": {
+      "page": "https://www.rigol.com/intl/products/function-arbitrary-waveform-generator/DG5000.html",
+      "image_url": "https://www.rigol.com/dam/jcr:6350a8e1-c348-4b0f-b9e3-fe5458293928/DG5000-front.png",
+      "size": [
+        600,
+        600
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        151,
+        600,
+        448
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "ea85bdd41ba08b03cebfe404552561e7ea80f9fc75ee73835c65f018c0f8c45c",
+      "asset_sha256": "8b03ec37c6ec611ee724e1bbebe7df7d3876bb6fa34c213b3080c2dac3b70e60"
+    },
+    "asset": "DAS_元件实物图片/C28.png"
+  },
+  {
+    "key": "rf",
+    "name": "AOM 射频驱动器",
+    "abbr": "RF driver",
+    "maker": "AeroDIODE",
+    "model": "Fiber-coupled AOM RF driver",
+    "routes": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "role": "向 AOM 输出匹配频率的 RF 功率，并用 TTL 或模拟输入控制幅度，实现光门控。",
+    "note": "路线 6 两通道需要共同参考时钟和稳定相对初相。",
+    "eq": "V_{\\rm RF}(u)=A(u)\\cos(\\Omega u+\\theta)",
+    "id": "C29",
+    "page": 8,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/fiber-coupled-aom/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2021/07/Fiber-coupled-AOM-RF-Driver-analog.jpg",
+      "size": [
+        1400,
+        1000
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        119,
+        161,
+        1205,
+        948
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "dc638413892f3516f5e7af11058935fb542e178e59802112d6be09098dbb4295",
+      "asset_sha256": "39e9338cf8919a6a16b2ae34b03c35747e5b5bdbaf74fd029d6aaf7fdfa61df9"
+    },
+    "asset": "DAS_元件实物图片/C29.png"
+  },
+  {
+    "key": "dds",
+    "name": "直接数字频率合成器",
+    "abbr": "DDS",
+    "maker": "Analog Devices",
+    "model": "AD9914 评估板",
+    "routes": [
+      6,
+      8
+    ],
+    "role": "产生可控频率和相位的 RF 信号；路线 8 用频率步进驱动 SSB，路线 6 可用作相干 RF 基准。",
+    "note": "评估板需要时钟、控制与供电；不等同于完整配套 AOM 功率驱动。",
+    "eq": "f_{\\rm DDS}=\\frac{\\mathrm{FTW}}{2^N}f_{\\rm clk}",
+    "id": "C30",
+    "page": 8,
+    "photo": {
+      "page": "https://wiki.analog.com/resources/eval/ad9914-user-guide",
+      "image_url": "https://wiki.analog.com/_media/resources/eval/user-guides/ad9914/figure1_ad9914_evb.png?w=700&tok=01fb86",
+      "size": [
+        700,
+        347
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        700,
+        347
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "707158c3104cf265992e08e5d871c5410754c4dc026b59c40e6c378258553d7a",
+      "asset_sha256": "707158c3104cf265992e08e5d871c5410754c4dc026b59c40e6c378258553d7a"
+    },
+    "asset": "DAS_元件实物图片/C30.png"
+  },
+  {
+    "key": "ld_driver",
+    "name": "激光电流与温控驱动",
+    "abbr": "LD driver / TEC",
+    "maker": "AeroDIODE",
+    "model": "CCS-CW 电流 / TEC 封装",
+    "routes": [
+      7
+    ],
+    "role": "稳定 LD 偏置电流与温度；高速电流调制输入改变瞬时光频，为啁啾提供电学控制。",
+    "note": "照片代表偏置/温控硬件；图示 CCS-CW 本身不能保证快啁啾，需独立高速端。",
+    "eq": "\\Delta\\nu(u)\\simeq K_I\\Delta I(u)+K_{\\mathcal T}\\Delta\\mathcal T(u)",
+    "id": "C31",
+    "page": 8,
+    "photo": {
+      "page": "https://www.aerodiode.com/product/laser-diode-driver/",
+      "image_url": "https://www.aerodiode.com/wp-content/uploads/2019/12/Laser-Driver-01-1-600x450.jpg",
+      "size": [
+        600,
+        450
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        32,
+        0,
+        561,
+        421
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "63c311be3e21a80ec146a9206a3b67264930544d0f6d27ee5ef82773985aa003",
+      "asset_sha256": "023ecc8482b246494571e584edb542b18cbbfdfc26c1884082bf27b0ff307894"
+    },
+    "asset": "DAS_元件实物图片/C31.png"
+  },
+  {
+    "key": "rf_eom",
+    "name": "电光调制器电压驱动",
+    "abbr": "EOM RF driver",
+    "maker": "Exail",
+    "model": "DR-AN 模拟驱动系列",
+    "routes": [
+      3,
+      5,
+      8
+    ],
+    "role": "将波形源电压放大到所需调制幅度，驱动 IM、PM 或 IQ 的 RF 端。",
+    "note": "图片展示射频封装；PGC 低频载波可使用合适的低频电压驱动。",
+    "eq": "V_{\\rm EOM}(u)=(h_{\\rm drv}*V_{\\rm AWG})(u)",
+    "id": "C32",
+    "page": 8,
+    "photo": {
+      "page": "https://www.exail.com/product/analog-drivers-photonics",
+      "image_url": "https://www.exail.com/media/10413/exail-produit-analog-drivers_804x530.png",
+      "size": [
+        804,
+        530
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        695,
+        530
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "cfe682b89b51d34f3fd48575846c4eba5fe3700634e9a564e9c854365c4c3f96",
+      "asset_sha256": "41a857c55f988c91cf2974787bb939270060409fa6e300e2f2f6f22da48171b3"
+    },
+    "asset": "DAS_元件实物图片/C32.png"
+  },
+  {
+    "key": "bias",
+    "name": "MZ / IQ 偏置控制器",
+    "abbr": "MBC",
+    "maker": "Exail",
+    "model": "MBC-IQ-LAB；IQ 偏置控制",
+    "routes": [
+      3,
+      8
+    ],
+    "role": "锁定调制器直流工作点；IM 保持所需消光点，IQ 保持载波与边带抑制条件。",
+    "note": "图片为 IQ 专用控制器；路线 3 应选 MZ 适用型号，或采用手动稳定偏置。",
+    "eq": "V_b(u)=V_b^*+\\delta V_b(u),\\quad\\delta V_b\\to0",
+    "id": "C33",
+    "page": 9,
+    "photo": {
+      "page": "https://www.exail.com/product/digital-iq-modulators-bias-controller-photonics",
+      "image_url": "https://www.exail.com/media/11975/exail-product-digital-iq-modulators-bias-controller_1000x700.png",
+      "size": [
+        1000,
+        700
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        64,
+        117,
+        934,
+        582
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "b01860664301ca44cf318ffb99e0039b9e32b1554405ec1067d08c6cc0d1292c",
+      "asset_sha256": "2e4b008986cc04860c6b9bd5b34edd8126f820d816ef66623fe189c3dbd9bc63"
+    },
+    "asset": "DAS_元件实物图片/C33.png"
+  },
+  {
+    "key": "fpga",
+    "name": "实时数字处理硬件",
+    "abbr": "FPGA / DSP",
+    "maker": "Digilent",
+    "model": "Genesys 2 Kintex-7 开发板",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "实现触发控制、数字下变频、I/Q、三相位/PGC 解调、相关与 FFT 等实时处理。",
+    "note": "PGC、数字 I/Q、相关与 FFT 是算法；开发板需编程及数据接口适配。",
+    "eq": "y[n,T]=\\mathcal D\\{x[n,T]\\}",
+    "id": "C34",
+    "page": 9,
+    "photo": {
+      "page": "https://digilent.com/shop/genesys-2-amd-kintex-7-fpga-development-board/",
+      "image_url": "https://cdn11.bigcommerce.com/s-7gavg/images/stencil/1280x1280/products/460/5643/15998876535_127d3780ec_o__76232.1602872655.386.513__24606.1749764241.png?c=2",
+      "size": [
+        386,
+        343
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        386,
+        343
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "7607c74443a5d533b35055f6896720bd057c142209285fda91d5b5b90892f370",
+      "asset_sha256": "7607c74443a5d533b35055f6896720bd057c142209285fda91d5b5b90892f370"
+    },
+    "asset": "DAS_元件实物图片/C34.png"
+  },
+  {
+    "key": "computer",
+    "name": "上位机与计算存储",
+    "abbr": "Host PC",
+    "maker": "Dell",
+    "model": "Dell Pro 14 笔记本外观示例",
+    "routes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "role": "配置仪器、接收与存储数据，运行离线/部分在线解调，显示声波时空图与谱分析。",
+    "note": "此处 PC 指计算机；PCIe 采集卡通常需要兼容台式机或服务器。",
+    "eq": "\\hat\\epsilon(z,T)=\\mathcal F_{\\rm DAS}\\{x[n,T]\\}",
+    "id": "C35",
+    "page": 9,
+    "photo": {
+      "page": "https://www.dell.com/en-us/shop/laptops/sf/latitude-laptops",
+      "image_url": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-pro/pc14250/media-gallery/notebook-dell-pro-pc14250-hd-fhd-gy-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=1062&qlt=100,0&resMode=sharp2&size=1062,804",
+      "size": [
+        1062,
+        804
+      ],
+      "retrieved": "2026-10-06",
+      "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+      "crop_box": [
+        0,
+        0,
+        1062,
+        793
+      ],
+      "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+      "source_png_sha256": "efe037b667dc4176d0baf7c4798c3ebeebd0af1eb7ef79f199bfe6b6e4673736",
+      "asset_sha256": "370672361d28af8b18184f111125a7aa120a37400b952dfecbc2da86e632188a"
+    },
+    "asset": "DAS_元件实物图片/C35.png"
+  }
+]

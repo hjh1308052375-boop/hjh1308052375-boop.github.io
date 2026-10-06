@@ -43,12 +43,51 @@
     "number": "04",
     "category": "applications",
     "title": {
-      "zh": "用 DTS 观察水泥水化与凝结",
-      "en": "Using DTS to observe cement hydration and setting"
+      "zh": "DTS：原理与实现方式",
+      "en": "DTS: principles and implementations"
     },
     "summary": {
-      "zh": "温度随深度和时间的变化能提供什么证据？把水化放热、热传递与水泥强度区分开。",
-      "en": "What can temperature through depth and time tell us? Separate hydration heat, heat transfer, and cement strength."
+      "zh": "从拉曼强度比出发，分点介绍温度测量、单端与双端标定，以及布里渊、瑞利测温的条件。",
+      "en": "Start with Raman intensity ratios, then explore temperature sensing, single/double-ended calibration, and the conditions for Brillouin/Rayleigh thermometry."
+    }
+  },
+  {
+    "slug": "das-optical-atlas",
+    "number": "05",
+    "category": "instrumentation",
+    "title": {
+      "zh": "DAS：原理与实现方式",
+      "en": "DAS: principles and implementations"
+    },
+    "summary": {
+      "zh": "分点理解分布式声学传感：测到了什么、怎样获得信号、有哪些代表性实现，以及如何解释。",
+      "en": "Understand distributed acoustic sensing point by point: observations, acquisition, representative implementations, and interpretation."
+    }
+  },
+  {
+    "slug": "dts-optical-atlas",
+    "number": "06",
+    "category": "instrumentation",
+    "title": {
+      "zh": "DTS：原理与实现方式",
+      "en": "DTS: principles and implementations"
+    },
+    "summary": {
+      "zh": "从拉曼强度比出发，分点介绍温度测量、单端与双端标定，以及布里渊、瑞利测温的条件。",
+      "en": "Start with Raman intensity ratios, then explore temperature sensing, single/double-ended calibration, and the conditions for Brillouin/Rayleigh thermometry."
+    }
+  },
+  {
+    "slug": "dss-optical-atlas",
+    "number": "07",
+    "category": "instrumentation",
+    "title": {
+      "zh": "DSS：原理与实现方式",
+      "en": "DSS: principles and implementations"
+    },
+    "summary": {
+      "zh": "分点理解布里渊和瑞利应变测量，比较时域、频域与相关域定位，并说明温度补偿和应变传递。",
+      "en": "Understand Brillouin and Rayleigh strain sensing, compare time/frequency/correlation localization, and examine temperature compensation and strain transfer."
     }
   }
 ]

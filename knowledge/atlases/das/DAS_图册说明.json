@@ -1,0 +1,95 @@
+{
+  "purpose": "35 component product photos and functions, nine DAS optical topologies and branch-by-branch field models",
+  "audience": "Chinese scientific reader; exportable atlas",
+  "evidence": "Original conceptual circuits, not measured data; product photos or appearance images from official manufacturers, identified as examples",
+  "route": "Deterministic TikZ / XeLaTeX; official manufacturer product photos or appearance renderings; no image generation",
+  "locked": [
+    "Routes 1–9 only",
+    "CIR ports 1→2 and 2→3",
+    "90-degree hybrid four outputs / two balanced pairs",
+    "3×3 coupler three outputs and terminated third input",
+    "Michelson round-trip arms with FRMs",
+    "Dual-pulse relative RF phase",
+    "Actual two-arm auxiliary MZI in OFDR",
+    "All diagram optical field labels mapped to formulas",
+    "35 component cards precede all circuits",
+    "Manufacturer images retained without generative repainting",
+    "35 component cards precede all circuits",
+    "Manufacturer images retained without generative repainting"
+  ],
+  "palette": {
+    "launch": "blue",
+    "return": "orange",
+    "reference": "purple",
+    "electrical": "gray dashed"
+  },
+  "sources": [
+    {
+      "route": 1,
+      "doi": "10.1109/JLT.2005.849924",
+      "reference": "Juarez et al., J. Lightwave Technol. 23, 2081–2087 (2005)."
+    },
+    {
+      "route": 2,
+      "doi": "10.1364/AO.55.007810",
+      "reference": "Dong et al., Applied Optics 55, 7810–7815 (2016)."
+    },
+    {
+      "route": 3,
+      "doi": "10.1364/OE.24.000853",
+      "reference": "Wang et al., Optics Express 24, 853–858 (2016)."
+    },
+    {
+      "route": 4,
+      "doi": "10.3390/photonics10050514",
+      "reference": "Phase Error Evaluation via Differentiation and Cross-Multiplication Demodulation in Phase-Sensitive OTDR, Photonics 10, 514 (2023)."
+    },
+    {
+      "route": 5,
+      "doi": "10.1007/s13320-017-0363-y",
+      "reference": "Liu et al., Distributed Acoustic Sensing With Michelson Interferometer Demodulation, Photonic Sensors (2017)."
+    },
+    {
+      "route": 6,
+      "doi": "10.1364/OL.42.000442",
+      "reference": "He et al., Optics Letters 42, 442–445 (2017)."
+    },
+    {
+      "route": 7,
+      "doi": "10.1364/OE.24.013121",
+      "reference": "Pastor-Graells et al., Optics Express 24, 13121–13133 (2016)."
+    },
+    {
+      "route": 8,
+      "doi": "10.1364/OL.395922",
+      "reference": "Zhang et al., Optics Letters 45, 5020–5023 (2020)."
+    },
+    {
+      "route": 9,
+      "doi": "10.1364/AO.55.006735",
+      "reference": "Zhou, Chen & Bao, Applied Optics 55, 6735–6739 (2016)."
+    }
+  ],
+  "assumptions": [
+    "Scalar polarization-matched fields",
+    "Small strain",
+    "Fixed temperature for phase-strain conversion",
+    "Calibrated optical port matrices",
+    "Perturbation frozen within a trace or sweep",
+    "ASE and receiver noise omitted"
+  ],
+  "limitations": "Ideal field and demodulation models; does not establish experimental performance",
+  "source": "DAS_代表性光路图册.tex",
+  "DTS_dead_water_alignment": "N/A",
+  "verification": "pass: local XeLaTeX export, inherited independent equation checks, manual raster inspection; HTML interaction checked before installation",
+  "editable_sources": "Main .tex requires adjacent DAS_元件实物图片/ with C01-C35 PNG files; nine standalone circuit .tex files in ZIP figures/",
+  "date": "2026-10-06",
+  "previous_version": "Earlier 13-route and nine-route versions archived non-destructively under work/_archive/",
+  "pages": 21,
+  "front_component_pages": 9,
+  "component_count": 35,
+  "component_sources": "DAS_元件实物来源.md and DAS_元件实物与作用.json; image URL, product page, retrieval date, display processing and hashes recorded",
+  "field_labels": "01-08: bold enlarged B symbols match envelope formulas; 09: complete swept E fields; E_j=B_j exp(i omega_0 u) explained in figures and page 11",
+  "output_pdf": "DAS_代表性光路图册_标号修订.pdf",
+  "branch_label_audit": "pass: nine diagrams match equations; pulse branches B_0/B_1 explicitly labeled; no mixed E in pulse observable formulas; OFDR keeps complete E"
+}

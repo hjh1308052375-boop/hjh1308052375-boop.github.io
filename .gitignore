@@ -1,0 +1,10 @@
+光纤传感原理/
+work/
+__pycache__/
+# Keep previously generated atlas documents as local working material.
+knowledge/atlases/**/*.pdf
+knowledge/atlases/**/*.zip
+knowledge/atlases/**/文件说明.md
+knowledge/atlases/das/DAS_光路交互图册.html
+knowledge/atlases/dts/figures/*.png
+knowledge/atlases/dss/figures/*.png

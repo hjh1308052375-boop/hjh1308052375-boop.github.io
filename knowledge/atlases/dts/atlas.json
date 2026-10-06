@@ -1,0 +1,1391 @@
+{
+  "title": "DTS 温度传感原理图册",
+  "routes": [
+    {
+      "id": "DTS01",
+      "name": "单端拉曼 OTDR",
+      "en": "Single-ended Raman OTDR",
+      "mechanism": "Raman",
+      "topology": "raman",
+      "observable": "Stokes / anti-Stokes 强度比",
+      "obs_en": "Stokes / anti-Stokes intensity ratio",
+      "summary": "从一端发射脉冲、接收两条拉曼谱带；用参考温度区与差分衰减校正获得沿纤温度。",
+      "sum_en": "Launch and receive from one end; calibrate the Raman ratio using known-temperature references and differential attenuation.",
+      "components": [
+        "ld",
+        "ld_driver",
+        "awg",
+        "im",
+        "cir",
+        "fiber",
+        "wdm",
+        "apd",
+        "adc",
+        "bath",
+        "rtd",
+        "computer"
+      ],
+      "steps": [
+        {
+          "label": "B0 → B1 · 发射 / Launch",
+          "equation": "B1(t) = sqrt(P0) a(t);  z = c (t - t0) / (2 ng)",
+          "zh": "脉冲包络 a(t) 发射到光纤。往返时间定位 z；ng 是群折射率，t0 是系统延迟。",
+          "en": "The launched pulse envelope a(t) defines the interrogation. Round-trip delay gives z; ng is the group index and t0 the system delay."
+        },
+        {
+          "label": "B2S / B2AS · 散射 / Scattering",
+          "equation": "PS(z) ∝ (nR + 1) exp[-AS(z)];  PAS(z) ∝ nR exp[-AAS(z)]",
+          "zh": "nR = 1/[exp(γ/T)-1] 是声子占据数；γ = h ΔνR/kB，单位 K。A 包括相应通道的累计损耗。",
+          "en": "nR = 1/[exp(γ/T)-1] is the phonon occupation; γ = h ΔνR/kB in kelvin. A includes the cumulative channel loss."
+        },
+        {
+          "label": "iS / iAS · 接收 / Detection",
+          "equation": "iS = RS PS + bS;  iAS = RAS PAS + bAS",
+          "zh": "先扣除背景、暗信号并校正增益；光学 WDM 分离 Stokes 与 anti-Stokes，不能用电滤波代替。",
+          "en": "Subtract background/dark signals and calibrate channel gains. An optical WDM separates Stokes and anti-Stokes; electrical filtering cannot replace it."
+        },
+        {
+          "label": "R → T · 解调 / Calibration",
+          "equation": "D(z,t) = ln[PS/PAS] + C(t) - AΔ(z);  T(z,t) = γ/D(z,t)",
+          "zh": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds。这里采用 Hausner 的标定符号；C 吸收通道效率差，必须由已知温度区标定。",
+          "en": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds. This is the Hausner calibration convention; C absorbs channel-efficiency differences and needs known-temperature references."
+        },
+        {
+          "label": "Δz / σT · 分辨率 / Resolution",
+          "equation": "Δzpulse ≈ c τp/(2 ng);  Δzsample = c ΔtADC/(2 ng)",
+          "zh": "脉宽尺度与采样点间距不同；实际空间响应还受探测器带宽、滤波和编码影响。弱 anti-Stokes 通道通常主导温度不确定性。",
+          "en": "Pulse scale differs from sample spacing. Detector bandwidth, filtering, and coding also affect spatial response. Weak anti-Stokes returns often dominate temperature uncertainty."
+        }
+      ],
+      "limits": "熔接、弯曲及连接器会产生局部差分损耗；单端标定的损耗模型不能自动覆盖所有变化。",
+      "limits_en": "Splices, bends, and connectors create local differential losses; a single-ended loss model cannot automatically cover every change.",
+      "refs": [
+        "raman_se"
+      ]
+    },
+    {
+      "id": "DTS02",
+      "name": "双端拉曼 OTDR",
+      "en": "Double-ended Raman OTDR",
+      "mechanism": "Raman",
+      "topology": "raman_double",
+      "observable": "双向强度比与差分衰减",
+      "obs_en": "Forward/reverse ratios and differential attenuation",
+      "summary": "光纤两端接入光开关，交替从 A、B 两端测量；先统一物理坐标，再联合标定。",
+      "sum_en": "Connect both ends through an optical switch and interrogate alternately; map both traces to the same physical coordinate before joint calibration.",
+      "components": [
+        "ld",
+        "ld_driver",
+        "awg",
+        "im",
+        "cir",
+        "fiber",
+        "wdm",
+        "apd",
+        "adc",
+        "bath",
+        "rtd",
+        "computer",
+        "switch"
+      ],
+      "steps": [
+        {
+          "label": "B0 → B1 · 发射 / Launch",
+          "equation": "B1(t) = sqrt(P0) a(t);  z = c (t - t0) / (2 ng)",
+          "zh": "脉冲包络 a(t) 发射到光纤。往返时间定位 z；ng 是群折射率，t0 是系统延迟。",
+          "en": "The launched pulse envelope a(t) defines the interrogation. Round-trip delay gives z; ng is the group index and t0 the system delay."
+        },
+        {
+          "label": "B2S / B2AS · 散射 / Scattering",
+          "equation": "PS(z) ∝ (nR + 1) exp[-AS(z)];  PAS(z) ∝ nR exp[-AAS(z)]",
+          "zh": "nR = 1/[exp(γ/T)-1] 是声子占据数；γ = h ΔνR/kB，单位 K。A 包括相应通道的累计损耗。",
+          "en": "nR = 1/[exp(γ/T)-1] is the phonon occupation; γ = h ΔνR/kB in kelvin. A includes the cumulative channel loss."
+        },
+        {
+          "label": "iS / iAS · 接收 / Detection",
+          "equation": "iS = RS PS + bS;  iAS = RAS PAS + bAS",
+          "zh": "先扣除背景、暗信号并校正增益；光学 WDM 分离 Stokes 与 anti-Stokes，不能用电滤波代替。",
+          "en": "Subtract background/dark signals and calibrate channel gains. An optical WDM separates Stokes and anti-Stokes; electrical filtering cannot replace it."
+        },
+        {
+          "label": "A / B → z · 双端坐标 / Coordinates",
+          "equation": "zA=c(tA-t0A)/(2ng);  z=L-c(tB-t0B)/(2ng)",
+          "zh": "B 端迹线需要反转到 A 端的 z 坐标；两端时延零点和有效纤长 L 分别标定。",
+          "en": "Reverse the B-end trace into the A-end coordinate; calibrate both delay origins and the effective fiber length L."
+        },
+        {
+          "label": "DA / DB · 联合标定 / Joint calibration",
+          "equation": "ln(RA)+CA=γ/T+AΔ(0,z);  ln(RB)+CB=γ/T+AΔ(z,L)",
+          "zh": "若传递互易、两端增益已校准且温度在轮询间稳定，则两式平均得到 γ/T+AΔ(0,L)/2；仍需参考温度区确定常数。",
+          "en": "For reciprocal transfer, calibrated end gains, and temperature stable during switching, averaging yields γ/T+AΔ(0,L)/2; reference temperatures are still needed."
+        },
+        {
+          "label": "校正边界 / Limits of correction",
+          "equation": "T=γ/{[ln(RA)+CA+ln(RB)+CB]/2-AΔ(0,L)/2}",
+          "zh": "双端校正针对沿程差分损耗，不会消除未知时间变化、非互易增益、饱和或参考温区误差。",
+          "en": "Double-ended correction addresses distributed differential loss; it cannot remove unknown temporal changes, non-reciprocal gains, saturation, or bad references."
+        }
+      ],
+      "limits": "需要两端可达及稳定的双向坐标映射；两端交替测量的时间错位对快速过程尤其重要。",
+      "limits_en": "Both ends must be accessible and spatially aligned; interleaved acquisitions can alias rapid thermal changes.",
+      "refs": [
+        "raman_de"
+      ]
+    },
+    {
+      "id": "DTS03",
+      "name": "编码拉曼 OTDR",
+      "en": "Coded Raman OTDR",
+      "mechanism": "Raman",
+      "topology": "raman_coded",
+      "observable": "解码后的两通道脉冲响应",
+      "obs_en": "Decoded dual-channel impulse responses",
+      "summary": "保持拉曼测温原理，用多脉冲编码累积能量，再恢复单脉冲响应。",
+      "sum_en": "Keep the Raman thermometry principle, accumulate energy with coded pulses, and recover the single-pulse response.",
+      "components": [
+        "ld",
+        "ld_driver",
+        "awg",
+        "im",
+        "cir",
+        "fiber",
+        "wdm",
+        "apd",
+        "adc",
+        "bath",
+        "rtd",
+        "computer",
+        "fpga"
+      ],
+      "steps": [
+        {
+          "label": "a → c · 编码发射 / Coded launch",
+          "equation": "a(t)=Σk ck p(t-kTc)",
+          "zh": "ck 是实际非负发射码；双极性数学码需通过互补或分组采集实现，不能直接发射负光功率。",
+          "en": "ck is a realizable non-negative optical code. Bipolar mathematical codes require complementary/grouped acquisitions; negative optical power is impossible."
+        },
+        {
+          "label": "yS / yAS · 线性测量 / Linear acquisition",
+          "equation": "yj = C hj + ηj;  j ∈ {S,AS}",
+          "zh": "C 是由实际发射序列构造的编码矩阵；两通道共享时序，但噪声和增益不同。",
+          "en": "C is the matrix of actual launched codes; the two channels share timing but have different noise and gains."
+        },
+        {
+          "label": "y → h · 解码 / Decode",
+          "equation": "ĥj = D yj;  D C ≈ I",
+          "zh": "D 是匹配码族的解码算子；先解码两条通道，再扣背景、求比值和标定温度。",
+          "en": "D is the decoder for the selected code family. Decode both channels before background subtraction, ratio formation, and thermometry."
+        },
+        {
+          "label": "R → T · 解调 / Calibration",
+          "equation": "D(z,t) = ln[PS/PAS] + C(t) - AΔ(z);  T(z,t) = γ/D(z,t)",
+          "zh": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds。这里采用 Hausner 的标定符号；C 吸收通道效率差，必须由已知温度区标定。",
+          "en": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds. This is the Hausner calibration convention; C absorbs channel-efficiency differences and needs known-temperature references."
+        },
+        {
+          "label": "Δz / σT · 分辨率 / Resolution",
+          "equation": "Δzpulse ≈ c τp/(2 ng);  Δzsample = c ΔtADC/(2 ng)",
+          "zh": "脉宽尺度与采样点间距不同；实际空间响应还受探测器带宽、滤波和编码影响。弱 anti-Stokes 通道通常主导温度不确定性。",
+          "en": "Pulse scale differs from sample spacing. Detector bandwidth, filtering, and coding also affect spatial response. Weak anti-Stokes returns often dominate temperature uncertainty."
+        }
+      ],
+      "limits": "编码增益依赖码长、噪声、脉冲非线性与解码条件；不能把码长直接当作空间分辨率或保证的信噪比提升。",
+      "limits_en": "Coding benefit depends on code length, noise, pulse nonlinearity, and decoder conditions; code length does not itself set spatial resolution or guarantee SNR gain.",
+      "refs": [
+        "raman_code",
+        "raman_se"
+      ]
+    },
+    {
+      "id": "DTS04",
+      "name": "光子计数拉曼 OTDR",
+      "en": "Photon-counting Raman OTDR",
+      "mechanism": "Raman",
+      "topology": "raman_count",
+      "observable": "Stokes / anti-Stokes 到达时间直方图",
+      "obs_en": "Stokes / anti-Stokes arrival-time histograms",
+      "summary": "以单光子探测器和时间标记器替代模拟接收链；保留拉曼比值与标定关系。",
+      "sum_en": "Replace the analog receiver with single-photon detectors and time tagging; retain Raman-ratio calibration.",
+      "components": [
+        "ld",
+        "ld_driver",
+        "awg",
+        "im",
+        "cir",
+        "fiber",
+        "wdm",
+        "spad",
+        "timetag",
+        "bath",
+        "rtd",
+        "computer"
+      ],
+      "steps": [
+        {
+          "label": "发射 → 计数 / Launch to counts",
+          "equation": "NS(z), NAS(z) = counts in calibrated delay bins",
+          "zh": "以同步触发建立到达时间直方图；先扣暗计数与背景。时间箱宽是采样间距，不自动等于分辨率。",
+          "en": "Build delay histograms against the launch trigger; subtract dark/background counts. Bin width sets sampling, not automatically spatial resolution."
+        },
+        {
+          "label": "计数 → 功率代理 / Counts to power proxy",
+          "equation": "Pj ∝ (Nj-bj)/(ηj tm);  j ∈ {S,AS}",
+          "zh": "ηj 包括光路透过率与探测效率，tm 是累计时间；需在线性低计数区使用，检查死时间与堆积。",
+          "en": "ηj includes optical throughput and detector efficiency; tm is integration time. Operate in the low-count linear regime and check dead time and pile-up."
+        },
+        {
+          "label": "R → T · 解调 / Calibration",
+          "equation": "D(z,t) = ln[PS/PAS] + C(t) - AΔ(z);  T(z,t) = γ/D(z,t)",
+          "zh": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds。这里采用 Hausner 的标定符号；C 吸收通道效率差，必须由已知温度区标定。",
+          "en": "AΔ(z)=∫0^z[αAS(s)-αS(s)]ds. This is the Hausner calibration convention; C absorbs channel-efficiency differences and needs known-temperature references."
+        },
+        {
+          "label": "统计不确定性 / Counting uncertainty",
+          "equation": "σ²lnR ≈ 1/NS + 1/NAS;  σT ≈ (T²/γ) σlnR",
+          "zh": "仅适用于独立泊松计数、背景可忽略、标定参数固定。实际还需传播背景、效率及损耗标定误差。",
+          "en": "Applies only to independent Poisson counts, negligible background, and fixed calibration. Real uncertainty also includes background, efficiency, and attenuation calibration."
+        },
+        {
+          "label": "时间尺度 / Timing scales",
+          "equation": "Δzpulse ≈ c τp/(2ng);  Δzbin = c Δtbin/(2ng)",
+          "zh": "脉宽尺度与直方图箱间距不同；实际响应还受探测器抖动、光纤色散和计数处理影响。",
+          "en": "Pulse scale differs from histogram bin spacing. Detector jitter, fiber dispersion, and counting processing also affect the response."
+        }
+      ],
+      "limits": "SNSPD 与 SPAD 不是同一器件；示意图以单光子接收功能为概括，引用实例采用需要低温系统的 SNSPD。",
+      "limits_en": "SNSPD and SPAD are different detectors. The functional schematic represents single-photon reception; the cited experiment used cryogenic SNSPDs.",
+      "refs": [
+        "raman_count",
+        "raman_se"
+      ]
+    },
+    {
+      "id": "DTS05",
+      "name": "布里渊 BOTDA 测温",
+      "en": "Brillouin BOTDA thermometry",
+      "mechanism": "Brillouin",
+      "topology": "botda",
+      "observable": "局部布里渊频移 BFS",
+      "obs_en": "Local Brillouin frequency shift",
+      "summary": "通过泵浦-探测频差扫描获得局部增益谱；在应变已知或隔离时反演温度。",
+      "sum_en": "Scan pump-probe detuning to obtain local gain spectra; infer temperature only when strain is known or isolated.",
+      "components": [
+        "nll",
+        "iso",
+        "splitter",
+        "im",
+        "iq",
+        "bpf",
+        "edfa",
+        "pc",
+        "cir",
+        "fiber",
+        "pd",
+        "adc",
+        "dds",
+        "bias",
+        "computer"
+      ],
+      "steps": [
+        {
+          "label": "B0 → Bp / Bs · 光源 / Source",
+          "equation": "Bp(t)=sqrt(Pp) a(t) exp(i 2πνp t);  Bs(t)=sqrt(Ps) exp(i 2πνs t)",
+          "zh": "同源泵浦与探测支路分开。探测光经单边带调制及选边带滤波，下移到 νs=νp-Δν；两束在光纤中反向传播。",
+          "en": "Pump and probe are derived from the same source. Single-sideband modulation and sideband selection create νs=νp-Δν; the waves counter-propagate."
+        },
+        {
+          "label": "G(z,Δν) · 增益谱 / Gain spectrum",
+          "equation": "gB(z,Δν)=g0(z)/{1+[2(Δν-νB(z))/ΓB(z)]²}",
+          "zh": "弱增益、近稳态条件下用洛伦兹线型拟合局部谱。强泵浦耗尽、脉冲瞬态及谱重叠会破坏简化模型。",
+          "en": "Fit a local Lorentzian in the weak-gain, near-steady regime. Pump depletion, pulse transients, and overlapping spectra can invalidate this approximation."
+        },
+        {
+          "label": "i(t,Δν) → νB(z) · 定位 / Localization",
+          "equation": "Gmeas(z,Δν) ≈ ln[Ps,on/Ps,off];  z = c(t-t0)/(2 ng)",
+          "zh": "按触发时延定位，并扫描泵浦与探测频差 Δν；每个 z 拟合 Brillouin frequency shift，简称 BFS。",
+          "en": "Locate by trigger delay and scan the pump-probe detuning Δν. Fit the Brillouin frequency shift (BFS) at each position."
+        },
+        {
+          "label": "ΔνB · 温度与应变 / Cross-sensitivity",
+          "equation": "ΔνB = Cε Δεfiber + CT ΔT",
+          "zh": "相对于参考状态的小变化模型。Cε 的单位为 Hz/单位应变（或 MHz/με），CT 为 Hz/K；不能混用单位或把单一频移当作两个未知量。",
+          "en": "A small-change model relative to a reference. Cε is in Hz per unit strain (or MHz/με), CT in Hz/K. One shift cannot identify two unknowns."
+        },
+        {
+          "label": "解耦 / Compensation",
+          "equation": "Δεfiber=(ΔνB-CT ΔT)/Cε;  ΔT=(ΔνB-Cε Δεfiber)/CT",
+          "zh": "应变测量需要独立温度信息；测温需要已知或隔离的光纤应变。光缆热膨胀与约束会改变有效标定。",
+          "en": "Strain sensing requires independent temperature information; thermometry requires known or isolated fiber strain. Cable expansion and constraint alter the effective calibration."
+        }
+      ],
+      "limits": "BFS 同时对温度与应变敏感；松套管不能保证所有工况下完全无应变。还须校准实际光缆热响应。",
+      "limits_en": "BFS responds to temperature and strain. A loose tube does not guarantee zero strain under every condition; actual cable thermal response needs calibration.",
+      "refs": [
+        "brillouin_t",
+        "botda"
+      ]
+    },
+    {
+      "id": "DTS06",
+      "name": "瑞利 OFDR 相对测温",
+      "en": "Rayleigh OFDR relative thermometry",
+      "mechanism": "Rayleigh",
+      "topology": "ofdr",
+      "observable": "相对参考状态的局部谱移",
+      "obs_en": "Local spectral shift relative to a reference",
+      "summary": "用扫频干涉和局部瑞利指纹相关测量温度变化；已知参考温度及应变后才可恢复温度。",
+      "sum_en": "Use swept interferometry and local fingerprint correlation for temperature change; known reference temperature and strain are needed to recover temperature.",
+      "components": [
+        "tls",
+        "splitter",
+        "coupler2_dk",
+        "cir",
+        "fiber",
+        "delay",
+        "pc",
+        "bpd",
+        "adc",
+        "computer"
+      ],
+      "steps": [
+        {
+          "label": "B0 → B1 / BL · 分光 / Split",
+          "equation": "ν(t)=ν0+κt;  B1 ∝ exp[i2π∫ν(t)dt];  BL is the reference field",
+          "zh": "扫频光分为测量与参考支路；辅助不等臂 MZI 提供扫频时钟。κ 为实际光频扫描速率。",
+          "en": "Split the swept source into measurement and reference branches. An auxiliary unequal-arm MZI supplies the sweep clock; κ is the actual optical-frequency sweep rate."
+        },
+        {
+          "label": "B2 + BL → i · 拍频 / Beat",
+          "equation": "i(t) ∝ 2 Re[B2(t) BL*(t)];  fb=κ τrel",
+          "zh": "回波与参考光相干混频。τrel 是相对参考支路的延迟，需要零点标定，不能默认全部距离从光源开始。",
+          "en": "Mix the return with the reference. τrel is the delay relative to that arm; calibrate the distance origin rather than assuming it begins at the laser."
+        },
+        {
+          "label": "i → r(z) · 空间变换 / Spatial transform",
+          "equation": "z-zref = c fb/(2 ng κ);  Δzideal ≈ c/(2 ng Bν)",
+          "zh": "按实际光频重采样后作傅里叶变换。Bν 是光频扫描带宽；上述理想分辨率不等于应变标距。",
+          "en": "Resample on the measured optical-frequency grid before Fourier transformation. Bν is the optical scan bandwidth; ideal reflectometric resolution differs from the strain gauge length."
+        },
+        {
+          "label": "r0 / r1 → q · 指纹相关 / Fingerprint correlation",
+          "equation": "δν(z)=argmaxδ Corr[S0(z,ν), S1(z,ν+δ)];  q=-δν/ν0",
+          "zh": "在相同窗口内比较参考与当前瑞利指纹；δν 是当前谱相对参考的有符号光频移。通常拉伸导致红移 δν<0，因此 q>0；须按实际相关实现核对符号。",
+          "en": "Compare reference and current Rayleigh fingerprints in matching windows. δν is the signed current-minus-reference optical-frequency shift. Tension usually gives a red shift δν<0, hence q>0; verify the sign in the actual correlation implementation."
+        },
+        {
+          "label": "q → Δε / ΔT · 解耦 / Compensation",
+          "equation": "q = Kε Δεfiber + KT ΔT",
+          "zh": "Kε、KT 按此符号约定实测标定；普通硅纤中通常为正。温度和应变同时变化时需第二个独立观测。",
+          "en": "Calibrate Kε and KT under this sign convention; they are usually positive for ordinary silica fiber. Simultaneous temperature and strain changes require a second independent observation."
+        }
+      ],
+      "limits": "不是免标定的绝对温度计；大谱移、相干衰落和扫频期间状态变化会使相关失效。",
+      "limits_en": "This is not calibration-free absolute thermometry. Large shifts, fading, and state changes during a sweep can defeat correlation.",
+      "refs": [
+        "ofdr"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "key": "nll",
+      "name": "窄线宽激光器",
+      "abbr": "NLL",
+      "maker": "Chilas",
+      "model": "CF3 1550 nm 蝶形封装",
+      "role": "提供相干光源与同源本振；光频稳定度及线宽影响布里渊和瑞利谱估计。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "B0(t)=sqrt(P0) exp[i(2πν0t+φL)]",
+      "id": "C01",
+      "page": 1,
+      "photo": {
+        "page": "https://chilasbv.com/chilas-cf3-1550-nm/",
+        "image_url": "https://chilasbv.com/wp-content/uploads/2025/07/Chilas-CF3-butterfly-packaged-laser.webp",
+        "size": [
+          768,
+          432
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          584,
+          430
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "31665b755cc2bbf961b8a76a9907ca19cfd2ae7134094955165dcd2614ebdf90",
+        "asset_sha256": "c15ca4205a5ced2ce2bd2163bb21e623d27bd692c7fe73e2c0135e37bdf03bcf"
+      },
+      "asset": "shared/C01.png",
+      "en": "Narrow-linewidth laser",
+      "role_en": "Provide a coherent source for Brillouin interrogation and a same-source local oscillator; stability and linewidth affect spectral estimation.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://chilasbv.com/chilas-cf3-1550-nm/"
+    },
+    {
+      "key": "ld",
+      "name": "可电流调谐激光二极管",
+      "abbr": "LD",
+      "maker": "AeroDIODE",
+      "model": "1550 nm DFB 蝶形激光系列",
+      "role": "选择与拉曼谱带、脉冲能量及光纤匹配的光源；照片为封装示例，不保证适合所有拉曼系统。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "B1(t)=sqrt(P0) a(t)",
+      "id": "C02",
+      "page": 1,
+      "photo": {
+        "page": "https://www.aerodiode.com/product/1550-nm-laser-diode/",
+        "image_url": "https://www.aerodiode.com/wp-content/uploads/2020/05/1550-nm-laser-diode-2.jpg",
+        "size": [
+          986,
+          752
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          36,
+          60,
+          857,
+          723
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "be6309dd8022690f79fe19dde46f6ff66456781f72268f78cb4b84bd1904fb2e",
+        "asset_sha256": "38b02e1e095a90a5bc488c482f327f65c392d6b3359ec23efad7a093acb45fce"
+      },
+      "asset": "shared/C02.png",
+      "en": "Pulsed laser source",
+      "role_en": "Select a laser matched to Raman bands, pulse energy, and fiber. The package photo does not certify suitability for every Raman system.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.aerodiode.com/product/1550-nm-laser-diode/"
+    },
+    {
+      "key": "tls",
+      "name": "扫频可调谐激光器",
+      "abbr": "TLS",
+      "maker": "Santec",
+      "model": "TSL-570；内置扫频控制",
+      "role": "连续扫描光频供 OFDR 使用；辅助干涉仪记录扫频非线性。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "ν(t)=ν0+κt",
+      "id": "C03",
+      "page": 1,
+      "photo": {
+        "page": "https://inst.santec.com/products/test-and-measurement/tunablelaser",
+        "image_url": "https://santec-inst.transforms.svdcdn.com/production/product-images/Japan/TSL-570_A.png?w=363&h=242&q=80&fm=png&fit=crop&dm=1768835583&s=7b53e54b280f26da58159b5bada910e7",
+        "size": [
+          363,
+          242
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          19,
+          26,
+          339,
+          217
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "34648dbb2c183ea6226fbc9f51715c91e0986822700f9b220de38c0d547eefbe",
+        "asset_sha256": "6cce8455cd23e77f1906f061cce834b63212d8c73142e5c2d2516544e4a9017d"
+      },
+      "asset": "shared/C03.png",
+      "en": "Swept tunable laser",
+      "role_en": "Sweep optical frequency continuously for OFDR; an auxiliary interferometer measures scan nonlinearity.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://inst.santec.com/products/test-and-measurement/tunablelaser"
+    },
+    {
+      "key": "iso",
+      "name": "光隔离器",
+      "abbr": "ISO",
+      "maker": "DK Photonics",
+      "model": "1550 nm 非偏振相关隔离器",
+      "role": "允许发射方向传光，抑制反向反馈进入激光器。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Pforward=Tiso Pin; Treverse≪Tiso",
+      "id": "C04",
+      "page": 1,
+      "photo": {
+        "page": "https://www.dkphotonics.com/product/1550nm-polarization-insensitive-isolator.html",
+        "image_url": "https://www.dkphotonics.com/wp-content/uploads/ISO-1X1-bare-fiber-1024x640.png",
+        "size": [
+          1024,
+          640
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          154,
+          1024,
+          561
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "54ed07310c5613a859139c5b97404505d86ede2878da86555770f63fd85caeb2",
+        "asset_sha256": "1bd8285d139841192cc5020d8d87b4527811ce3ae89fa442960869ae87919bb6"
+      },
+      "asset": "shared/C04.png",
+      "en": "Optical isolator",
+      "role_en": "Pass launch light and suppress optical feedback into the laser.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.dkphotonics.com/product/1550nm-polarization-insensitive-isolator.html"
+    },
+    {
+      "key": "splitter",
+      "name": "1×2 分光耦合器",
+      "abbr": "OC",
+      "maker": "AC Photonics",
+      "model": "1×2 单模熔融耦合器",
+      "role": "将源光分到泵浦/探测或测量/参考支路；分光比与插入损耗需计入功率预算。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "P1≈ηPin; P2≈(1-η)Pin",
+      "id": "C05",
+      "page": 2,
+      "photo": {
+        "page": "https://acphotonics.com/1x2-and-2x2-single-mode-fused-coupler",
+        "image_url": "https://acphotonics.com/image/cache/catalog/product/Singlemode_Dual_Window_Couplers_54_1-500x500.png",
+        "size": [
+          500,
+          500
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          160,
+          500,
+          350
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "b964e2832495615bc2f8b893a54644267d4b20dbf76334b21874252a20ba6120",
+        "asset_sha256": "afd902c0b781567f34a320cc5926a47c5cc6eb3521641d9052efc24c4e272dda"
+      },
+      "asset": "shared/C05.png",
+      "en": "Optical splitter",
+      "role_en": "Divide source power into pump/probe or measurement/reference arms; include splitting loss in the power budget.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://acphotonics.com/1x2-and-2x2-single-mode-fused-coupler"
+    },
+    {
+      "key": "coupler2_dk",
+      "name": "2×2 光纤耦合器",
+      "abbr": "2×2 OC",
+      "maker": "DK Photonics",
+      "model": "1550 nm PM 熔融耦合器",
+      "role": "把回波与参考光混合成两条互补输出，供平衡检测。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Bout=U2×2 Bin",
+      "id": "C06",
+      "page": 2,
+      "photo": {
+        "page": "https://www.dkphotonics.com/product/pm-fused-coupler.html",
+        "image_url": "https://www.dkphotonics.com/wp-content/uploads/2x2-pm-fiber-fused-coupler-1024x640.jpg",
+        "size": [
+          1024,
+          640
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          125,
+          1024,
+          537
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "20c9f5042e4d0b0baceb5d40f6845384fb31681a3346f2d5fcf2775cbd7bb3ab",
+        "asset_sha256": "3fc54a4b077e992d683333cb4278de63e7d72f1d5d5077198611e338b9c5fea6"
+      },
+      "asset": "shared/C06.png",
+      "en": "2×2 optical coupler",
+      "role_en": "Mix return and reference fields into two complementary outputs for balanced detection.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.dkphotonics.com/product/pm-fused-coupler.html"
+    },
+    {
+      "key": "cir",
+      "name": "三端口光环形器",
+      "abbr": "CIR",
+      "maker": "DK Photonics",
+      "model": "1550 nm 3-port PIOC",
+      "role": "发射时端口 1→2；回波或反向探测光由端口 2→3 接入接收器。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "port 1 → 2; port 2 → 3",
+      "id": "C08",
+      "page": 2,
+      "photo": {
+        "page": "https://www.dkphotonics.com/product/1550nm-3-port-polarization-insensitive-optical-circulator.html",
+        "image_url": "https://www.dkphotonics.com/wp-content/uploads/3-port-PIOC-fc-apc-1024x640.png",
+        "size": [
+          1024,
+          640
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          40,
+          1024,
+          566
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "08da554d6abd2229247d2e92f30f9665a8300344c8a57350dad93bc43cb692d5",
+        "asset_sha256": "942f37edfddbaae19e829540bf73d29e1a53e8addd844ec2f122aae113cfc07b"
+      },
+      "asset": "shared/C08.png",
+      "en": "Three-port optical circulator",
+      "role_en": "Route port 1 to 2 for launch and port 2 to 3 for returning probe/backscatter.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.dkphotonics.com/product/1550nm-3-port-polarization-insensitive-optical-circulator.html"
+    },
+    {
+      "key": "edfa",
+      "name": "掺铒光纤放大器",
+      "abbr": "EDFA",
+      "maker": "Optilab",
+      "model": "C-band 双级台式 EDFA 系列",
+      "role": "放大选定的发射谱带；考虑 ASE、增益动态及非线性效应。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Pout≈G Pin+PASE",
+      "id": "C09",
+      "page": 3,
+      "photo": {
+        "page": "https://www.optilab.com/en-ca/products/dual-stage-erbium-doped-fiber-amplifier-c-band-benchtop",
+        "image_url": "https://www.optilab.com/cdn/shop/files/2_030882ad-dcb2-4b04-96e6-d0c4c0cce57d.png?v=1760593674",
+        "size": [
+          3245,
+          2168
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          290,
+          126,
+          3111,
+          2017
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "84b9852665ffb07f0c9c9bc3883af113745497f41ef881665b2379abefcc91b3",
+        "asset_sha256": "055959e91da95fc911125ceb00388a8697723b85e998124e15c8b1b1c9b1d9d4"
+      },
+      "asset": "shared/C09.png",
+      "en": "Erbium-doped optical amplifier",
+      "role_en": "Amplify the selected launch band; account for ASE, gain dynamics, and nonlinear effects.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.optilab.com/en-ca/products/dual-stage-erbium-doped-fiber-amplifier-c-band-benchtop"
+    },
+    {
+      "key": "bpf",
+      "name": "光带通滤波器",
+      "abbr": "BPF",
+      "maker": "PriTel",
+      "model": "PM-TB-TWF 可调带通滤波器",
+      "role": "选出布里渊或调制边带，抑制 ASE；拉曼双谱带用专用 WDM，不能直接复用该滤波器。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Bout(ν)=Hopt(ν) Bin(ν)",
+      "id": "C10",
+      "page": 3,
+      "photo": {
+        "page": "https://www.pritel.com/tbtwf.html",
+        "image_url": "https://www.pritel.com/images/TBTWF_small.gif",
+        "size": [
+          533,
+          200
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          533,
+          200
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "f1bc579dbafd709318fd74d0c962d7428f726a8aff7cd6a447f8409aa2951ad4",
+        "asset_sha256": "f1bc579dbafd709318fd74d0c962d7428f726a8aff7cd6a447f8409aa2951ad4"
+      },
+      "asset": "shared/C10.png",
+      "en": "Optical bandpass filter",
+      "role_en": "Select Brillouin/modulation bands and reject ASE. Raman requires dedicated dual-band filters.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.pritel.com/tbtwf.html"
+    },
+    {
+      "key": "im",
+      "name": "电光强度调制器",
+      "abbr": "IM / MZM",
+      "maker": "Exail",
+      "model": "LiNbO3 强度调制器系列",
+      "role": "生成脉冲、编码或小信号强度调制；记录脉冲边沿、消光比和调制深度。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Bpulse(t)=a(t) B0(t)",
+      "id": "C12",
+      "page": 3,
+      "photo": {
+        "page": "https://www.exail.com/index.php/fr/product/linbo3-intensity-modulators-photonics",
+        "image_url": "https://www.exail.com/media/7912/exail-produits-linbo3-intensity-modulators_2835x975.png",
+        "size": [
+          2835,
+          975
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          87,
+          2835,
+          797
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "952dc6205ec84f018d019ffba36863ddccadd63025d750549a195c2c9968c220",
+        "asset_sha256": "6365c079279e5f464ff23966e57f535311e32e1dbd791f1fa389f673e99f3dda"
+      },
+      "asset": "shared/C12.png",
+      "en": "Intensity modulator / pulse gate",
+      "role_en": "Generate pulses, codes, or small-signal intensity modulation; characterize edges, extinction, and modulation depth.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.exail.com/index.php/fr/product/linbo3-intensity-modulators-photonics"
+    },
+    {
+      "key": "iq",
+      "name": "IQ / 双平行 MZ 调制器",
+      "abbr": "SSB-EOM",
+      "maker": "Exail",
+      "model": "MXIQER-LN-30",
+      "role": "生成可扫描的光频差；须选边带、抑载波并稳定偏置。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "νs=νp-Δν (selected sideband)",
+      "id": "C13",
+      "page": 4,
+      "photo": {
+        "page": "https://www.exail.com/news/unlocking-qkd-potential-with-optical-iq-modulator",
+        "image_url": "https://www.exail.com/media/9005/mxiqerln30-exail_2835x553.png",
+        "size": [
+          2835,
+          553
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          2835,
+          553
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "c4e99e3db1e0f4636daad987be459a20ba0e8e3481c3cbde7243e36926ec32ba",
+        "asset_sha256": "566cfffd1ee4c6bb2d777c06720315d974d9a9a6b59ebe9f9c29a4db9f6a05e6"
+      },
+      "asset": "shared/C13.png",
+      "en": "Single-sideband optical modulator",
+      "role_en": "Generate a scanned optical-frequency offset; select a sideband, suppress the carrier, and stabilize bias.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.exail.com/news/unlocking-qkd-potential-with-optical-iq-modulator"
+    },
+    {
+      "key": "pc",
+      "name": "偏振控制器",
+      "abbr": "PC",
+      "maker": "DK Photonics",
+      "model": "3PPC560 三环手动控制器",
+      "role": "控制偏振，减少相干衰落及布里渊增益变化；不能保证所有位置始终匹配。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Bout=JPC Bin",
+      "id": "C17",
+      "page": 5,
+      "photo": {
+        "page": "https://www.dkphotonics.com/product/3-paddle-manual-polarization-controllers-56-mm-loop.html",
+        "image_url": "https://www.dkphotonics.com/wp-content/uploads/3-paddle-manual-polarization-controllers-56-mm-loop-2-1024x640.png",
+        "size": [
+          1024,
+          640
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          91,
+          81,
+          949,
+          569
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "5a75546cfa03cbfd789a339d1b68c45de25f6585a31f887d5feb6fae60dc93f6",
+        "asset_sha256": "f72905a962b5bddacaeb86264c3135fd31dec2a18513c225c9ea124e18bc81ae"
+      },
+      "asset": "shared/C17.png",
+      "en": "Polarization controller",
+      "role_en": "Control polarization to reduce coherent fading and variation of Brillouin gain.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.dkphotonics.com/product/3-paddle-manual-polarization-controllers-56-mm-loop.html"
+    },
+    {
+      "key": "fiber",
+      "name": "感测光纤 / 光缆",
+      "abbr": "Sensing fiber",
+      "maker": "AFW Technologies",
+      "model": "SMF 光纤盘产品系列",
+      "role": "拉曼、布里渊或瑞利散射介质；单模/多模、涂覆与光缆结构按测量机制选择。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "treturn≈2ngz/c (calibrated origin)",
+      "id": "C21",
+      "page": 6,
+      "photo": {
+        "page": "https://www.afwtechnologies.com.au/delay_lines.html",
+        "image_url": "https://www.afwtechnologies.com.au/images/3%20Reels-1.jpg",
+        "size": [
+          478,
+          460
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          478,
+          460
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "8df7f0f68b4bbbcaf7f559945e4d1b6cdd3341349bd9e61939140a5895338fc6",
+        "asset_sha256": "8df7f0f68b4bbbcaf7f559945e4d1b6cdd3341349bd9e61939140a5895338fc6"
+      },
+      "asset": "shared/C21.png",
+      "en": "Sensing fiber / cable",
+      "role_en": "The Raman/Brillouin/Rayleigh scattering medium; choose mode count, coating, and cable design for the mechanism.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.afwtechnologies.com.au/delay_lines.html"
+    },
+    {
+      "key": "delay",
+      "name": "延迟 / 参考光纤",
+      "abbr": "Delay fiber",
+      "maker": "AFW Technologies",
+      "model": "SM1 光纤延迟盒系列",
+      "role": "设置参考光程或相关域调制延迟；实际延迟需标定。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "τarm=ng Larm/c (one way)",
+      "id": "C22",
+      "page": 6,
+      "photo": {
+        "page": "https://www.afwtechnologies.com.au/delay_lines.html",
+        "image_url": "https://www.afwtechnologies.com.au/images/box-1000m-smaller.jpg",
+        "size": [
+          472,
+          328
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          26,
+          469,
+          328
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "e6e36b938201704f8624feb1e6eac9b15ed7721eafab4e63d8cf2ecf27a3354b",
+        "asset_sha256": "909091e5dcadc72d6a1bcfa5c7bba39aa12949c3aae68cc457ffba7b8b7cafd6"
+      },
+      "asset": "shared/C22.png",
+      "en": "Reference / delay fiber",
+      "role_en": "Set an optical reference delay or the modulation correlation offset; actual delay requires calibration.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.afwtechnologies.com.au/delay_lines.html"
+    },
+    {
+      "key": "pd",
+      "name": "单通道光电接收器",
+      "abbr": "PD + TIA",
+      "maker": "Optilab",
+      "model": "HPR-IG InGaAs 接收器系列",
+      "role": "探测 BOTDA 探测光输出，或辅助干涉仪信号；光谱响应与带宽按支路匹配。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "i=R P+b; V=ZT*i",
+      "id": "C25",
+      "page": 7,
+      "photo": {
+        "page": "https://www.optilab.com/products/100-mhz-high-gain-ingaas-photoreceiver-module",
+        "image_url": "https://www.optilab.com/cdn/shop/files/HPR.png?v=1760515607",
+        "size": [
+          3097,
+          2648
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          145,
+          175,
+          2809,
+          2440
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "9cedb28b7fc7a7ed93ad772db09aa8b07e9af3955107338c2a7647a585cbf05b",
+        "asset_sha256": "9e9850fed7cf6ef9c070c7838386c4242d02d2318b9f86e245e849dec18e599a"
+      },
+      "asset": "shared/C25.png",
+      "en": "Photoreceiver + TIA",
+      "role_en": "Detect BOTDA probe output or auxiliary interferometer signals; match spectral response and bandwidth.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.optilab.com/products/100-mhz-high-gain-ingaas-photoreceiver-module"
+    },
+    {
+      "key": "bpd",
+      "name": "平衡光电接收器",
+      "abbr": "BPD",
+      "maker": "Optoplex",
+      "model": "BR-C0100B1DC",
+      "role": "对互补输出的光电流作差，提取相干混频并减小共模强度噪声。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "idiff=R(P+ - P-)",
+      "id": "C26",
+      "page": 7,
+      "photo": {
+        "page": "https://www.optoplex.com/Balanced_Photo-Receivers.htm",
+        "image_url": "https://www.optoplex.com/images/Balanced_PD_BR-C0100B1DC.jpg",
+        "size": [
+          3137,
+          2385
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          3137,
+          2385
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "13e3f4ed93de3fb2114d5c269cc643c53f61887b859adbd684d5a51d58f310b1",
+        "asset_sha256": "19ca991ecf8defbb504d49924cac3977a1318c360425d17d417207f1582cace9"
+      },
+      "asset": "shared/C26.png",
+      "en": "Balanced photoreceiver",
+      "role_en": "Subtract two complementary receiver currents to extract coherent mixing while reducing common-mode intensity noise.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.optoplex.com/Balanced_Photo-Receivers.htm"
+    },
+    {
+      "key": "adc",
+      "name": "高速数据采集卡",
+      "abbr": "ADC / DAQ",
+      "maker": "AlazarTech",
+      "model": "ATS9440 四通道 PCIe 卡",
+      "role": "同步采样接收电压；标定采样间隔、带宽和触发零点。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "V[k]=V(t0+k ΔtADC)",
+      "id": "C27",
+      "page": 7,
+      "photo": {
+        "page": "https://www.alazartech.com/en/product/ats9440/16/",
+        "image_url": "https://www.alazartech.com/LowCal/Resources/static/images/uploads/originals/products/16/6/6445ATS9440AlazarTech.jpg",
+        "size": [
+          360,
+          288
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          25,
+          0,
+          334,
+          288
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "35c3552500237342f287d7c7fd8da18ac43ec91620ab92fa8ce59d5b73b91a99",
+        "asset_sha256": "de6184477ab0085cb633cbb8b2e6b80e80f2d6328285ba42337965d72977f05e"
+      },
+      "asset": "shared/C27.png",
+      "en": "Synchronous digitizer",
+      "role_en": "Sample synchronized receiver voltages; characterize sampling interval, bandwidth, and trigger delay.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.alazartech.com/en/product/ats9440/16/"
+    },
+    {
+      "key": "awg",
+      "name": "脉冲 / 任意波形发生器",
+      "abbr": "AWG",
+      "maker": "RIGOL",
+      "model": "DG5000 系列",
+      "role": "按路线产生同步脉冲门控、发射码或小信号正弦调制。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "Vdrive(t)=programmed waveform",
+      "id": "C28",
+      "page": 7,
+      "photo": {
+        "page": "https://www.rigol.com/intl/products/function-arbitrary-waveform-generator/DG5000.html",
+        "image_url": "https://www.rigol.com/dam/jcr:6350a8e1-c348-4b0f-b9e3-fe5458293928/DG5000-front.png",
+        "size": [
+          600,
+          600
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          151,
+          600,
+          448
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "ea85bdd41ba08b03cebfe404552561e7ea80f9fc75ee73835c65f018c0f8c45c",
+        "asset_sha256": "8b03ec37c6ec611ee724e1bbebe7df7d3876bb6fa34c213b3080c2dac3b70e60"
+      },
+      "asset": "shared/C28.png",
+      "en": "Waveform / trigger generator",
+      "role_en": "Generate synchronized pulse gates, codes, or sinusoidal modulation for the selected route.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.rigol.com/intl/products/function-arbitrary-waveform-generator/DG5000.html"
+    },
+    {
+      "key": "dds",
+      "name": "直接数字频率合成器",
+      "abbr": "DDS",
+      "maker": "Analog Devices",
+      "model": "AD9914 评估板",
+      "role": "设置射频驱动频率，控制光学边带及泵浦-探测光频差扫描。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "fRF=programmed frequency",
+      "id": "C30",
+      "page": 8,
+      "photo": {
+        "page": "https://wiki.analog.com/resources/eval/ad9914-user-guide",
+        "image_url": "https://wiki.analog.com/_media/resources/eval/user-guides/ad9914/figure1_ad9914_evb.png?w=700&tok=01fb86",
+        "size": [
+          700,
+          347
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          700,
+          347
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "707158c3104cf265992e08e5d871c5410754c4dc026b59c40e6c378258553d7a",
+        "asset_sha256": "707158c3104cf265992e08e5d871c5410754c4dc026b59c40e6c378258553d7a"
+      },
+      "asset": "shared/C30.png",
+      "en": "RF frequency synthesizer",
+      "role_en": "Set the RF drive frequency for optical sideband generation and pump-probe detuning scans.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://wiki.analog.com/resources/eval/ad9914-user-guide"
+    },
+    {
+      "key": "ld_driver",
+      "name": "激光电流与温控驱动",
+      "abbr": "LD driver / TEC",
+      "maker": "AeroDIODE",
+      "model": "CCS-CW 电流 / TEC 封装",
+      "role": "提供激光电流与温控；须标定驱动参数对光频和功率的实际影响。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "νlaser=f(I,Tlaser)",
+      "id": "C31",
+      "page": 8,
+      "photo": {
+        "page": "https://www.aerodiode.com/product/laser-diode-driver/",
+        "image_url": "https://www.aerodiode.com/wp-content/uploads/2019/12/Laser-Driver-01-1-600x450.jpg",
+        "size": [
+          600,
+          450
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          32,
+          0,
+          561,
+          421
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "63c311be3e21a80ec146a9206a3b67264930544d0f6d27ee5ef82773985aa003",
+        "asset_sha256": "023ecc8482b246494571e584edb542b18cbbfdfc26c1884082bf27b0ff307894"
+      },
+      "asset": "shared/C31.png",
+      "en": "Laser current / TEC controller",
+      "role_en": "Drive laser current and temperature; calibrate how these settings affect optical frequency and power.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.aerodiode.com/product/laser-diode-driver/"
+    },
+    {
+      "key": "bias",
+      "name": "MZ / IQ 偏置控制器",
+      "abbr": "MBC",
+      "maker": "Exail",
+      "model": "MBC-IQ-LAB；IQ 偏置控制",
+      "role": "稳定 MZ / IQ 调制器工作点，控制载波与非目标边带泄漏。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "VMZ=Vbias+Vdrive",
+      "id": "C33",
+      "page": 9,
+      "photo": {
+        "page": "https://www.exail.com/product/digital-iq-modulators-bias-controller-photonics",
+        "image_url": "https://www.exail.com/media/11975/exail-product-digital-iq-modulators-bias-controller_1000x700.png",
+        "size": [
+          1000,
+          700
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          64,
+          117,
+          934,
+          582
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "b01860664301ca44cf318ffb99e0039b9e32b1554405ec1067d08c6cc0d1292c",
+        "asset_sha256": "2e4b008986cc04860c6b9bd5b34edd8126f820d816ef66623fe189c3dbd9bc63"
+      },
+      "asset": "shared/C33.png",
+      "en": "Modulator bias controller",
+      "role_en": "Stabilize the operating point of MZ/IQ modulators and suppress undesired carrier/sideband leakage.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.exail.com/product/digital-iq-modulators-bias-controller-photonics"
+    },
+    {
+      "key": "fpga",
+      "name": "实时数字处理硬件",
+      "abbr": "FPGA / DSP",
+      "maker": "Digilent",
+      "model": "Genesys 2 Kintex-7 开发板",
+      "role": "执行时序、编码和数字处理；算法依托电子硬件，不是独立光学元件。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "ĥ=D y (example: code decoding)",
+      "id": "C34",
+      "page": 9,
+      "photo": {
+        "page": "https://digilent.com/shop/genesys-2-amd-kintex-7-fpga-development-board/",
+        "image_url": "https://cdn11.bigcommerce.com/s-7gavg/images/stencil/1280x1280/products/460/5643/15998876535_127d3780ec_o__76232.1602872655.386.513__24606.1749764241.png?c=2",
+        "size": [
+          386,
+          343
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          386,
+          343
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "7607c74443a5d533b35055f6896720bd057c142209285fda91d5b5b90892f370",
+        "asset_sha256": "7607c74443a5d533b35055f6896720bd057c142209285fda91d5b5b90892f370"
+      },
+      "asset": "shared/C34.png",
+      "en": "Digital processing hardware",
+      "role_en": "Implement timing, coding, and digital processing; the algorithm is hosted by electronics rather than a separate optical device.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://digilent.com/shop/genesys-2-amd-kintex-7-fpga-development-board/"
+    },
+    {
+      "key": "computer",
+      "name": "上位机与计算存储",
+      "abbr": "Host PC",
+      "maker": "Dell",
+      "model": "Dell Pro 14 笔记本外观示例",
+      "role": "完成比值标定、谱拟合、傅里叶变换、相关与误差传播；算法不是光学元件。",
+      "note": "厂家外观示例，非性能推荐；须另行核对波长、带宽、光功率及实际封装。",
+      "eq": "observable → calibration → uncertainty",
+      "id": "C35",
+      "page": 9,
+      "photo": {
+        "page": "https://www.dell.com/en-us/shop/laptops/sf/latitude-laptops",
+        "image_url": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-pro/pc14250/media-gallery/notebook-dell-pro-pc14250-hd-fhd-gy-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=1062&qlt=100,0&resMode=sharp2&size=1062,804",
+        "size": [
+          1062,
+          804
+        ],
+        "retrieved": "2026-10-06",
+        "changes": "格式转为 PNG；透明背景铺白；照片内容未修改。",
+        "crop_box": [
+          0,
+          0,
+          1062,
+          793
+        ],
+        "display_changes": "PNG 格式；透明背景铺白；仅裁去近白边缘；保留厂家标记；必要时等比例缩小。",
+        "source_png_sha256": "efe037b667dc4176d0baf7c4798c3ebeebd0af1eb7ef79f199bfe6b6e4673736",
+        "asset_sha256": "370672361d28af8b18184f111125a7aa120a37400b952dfecbc2da86e632188a"
+      },
+      "asset": "shared/C35.png",
+      "en": "Host computation",
+      "role_en": "Perform calibration, spectral fitting, Fourier transforms, correlation, and uncertainty propagation; algorithms are not optical components.",
+      "note_en": "Manufacturer appearance example; wavelength, bandwidth, and packaging need separate selection.",
+      "image_kind": "manufacturer_photo",
+      "source_url": "https://www.dell.com/en-us/shop/laptops/sf/latitude-laptops"
+    },
+    {
+      "key": "wdm",
+      "name": "拉曼双带 WDM / 滤波模块",
+      "en": "Dual-band Raman WDM / filters",
+      "abbr": "WDM",
+      "role": "将回波分到 Stokes 与 anti-Stokes 通道，并抑制强瑞利光及泵浦泄漏。",
+      "role_en": "Separate Stokes/anti-Stokes bands and reject strong Rayleigh/pump leakage.",
+      "note": "需按激光波长配置两条拉曼谱带；普通 1550 nm 带通滤波器不能替代。",
+      "note_en": "Match both Raman bands to the laser; an ordinary 1550 nm bandpass is not a substitute.",
+      "eq": "PS=Pback|HS|²; PAS=Pback|HAS|²",
+      "id": "X01",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X01.svg"
+    },
+    {
+      "key": "apd",
+      "name": "双通道模拟弱光接收",
+      "en": "Dual-channel analog weak-light receiver",
+      "abbr": "APD / PD + TIA",
+      "role": "分别接收两条拉曼谱带并作同步采样。",
+      "role_en": "Detect both Raman bands and sample synchronously.",
+      "note": "示意的是接收功能；Si / InGaAs、增益、带宽与谱带匹配须另行选型。",
+      "note_en": "Functional illustration only; select Si/InGaAs, gain, bandwidth, and spectral coverage separately.",
+      "eq": "ij=Rj Pj+bj",
+      "id": "X02",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X02.svg"
+    },
+    {
+      "key": "switch",
+      "name": "双端测量光开关",
+      "en": "Optical switch for double-ended interrogation",
+      "abbr": "SW",
+      "role": "在 A、B 两个光纤端口之间轮询发射与回波接收。",
+      "role_en": "Alternate launch and reception between fiber ends A and B.",
+      "note": "记录切换时间及两端损耗；不是两个端口同时发射。",
+      "note_en": "Record switching time and end losses; this is sequential interrogation.",
+      "eq": "port(t) ∈ {A,B}",
+      "id": "X03",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X03.svg"
+    },
+    {
+      "key": "bath",
+      "name": "已知温度参考区",
+      "en": "Known-temperature reference section",
+      "abbr": "REF bath",
+      "role": "提供 γ、C 和差分衰减等标定量所需的已知温度区段。",
+      "role_en": "Provide known-temperature sections to calibrate γ, C, and attenuation.",
+      "note": "参考区长度、温度均匀性、热平衡与独立验证区都需要检查。",
+      "note_en": "Check section length, uniformity, equilibrium, and independent validation.",
+      "eq": "T(z ∈ Zref)=Tref",
+      "id": "X04",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X04.svg"
+    },
+    {
+      "key": "rtd",
+      "name": "独立参考温度计",
+      "en": "Independent reference thermometer",
+      "abbr": "RTD",
+      "role": "测量参考区温度，并记录其准确度和响应时间。",
+      "role_en": "Measure reference temperature with documented accuracy and response.",
+      "note": "DTS 与参考温度计时间需同步；不能用 DTS 自身输出作为独立校准真值。",
+      "note_en": "Synchronize timing; DTS output cannot serve as its own independent calibration truth.",
+      "eq": "Tref ± uref",
+      "id": "X05",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X05.svg"
+    },
+    {
+      "key": "spad",
+      "name": "单光子探测接收模块",
+      "en": "Single-photon detection module",
+      "abbr": "SNSPD / SPAD",
+      "role": "把弱拉曼光转为离散计数事件。",
+      "role_en": "Convert weak Raman photons into count events.",
+      "note": "两种探测器实现不同；本文引文使用 SNSPD，需低温系统。此图为功能示意。",
+      "note_en": "The detector technologies differ; the cited SNSPD experiment needs cryogenic cooling. This is a functional illustration.",
+      "eq": "Nj≈ηj Φj tm+bj",
+      "id": "X06",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X06.svg"
+    },
+    {
+      "key": "timetag",
+      "name": "时间相关计数 / 标记器",
+      "en": "Time-correlated counter / tagger",
+      "abbr": "TCSPC / TDC",
+      "role": "以发射触发为零点统计回波到达时间。",
+      "role_en": "Histogram return arrival times relative to launch triggers.",
+      "note": "时间箱、抖动、死时间及堆积均影响真实分辨率与温度误差。",
+      "note_en": "Bin size, jitter, dead time, and pile-up affect resolution and temperature error.",
+      "eq": "z=c(tarrival-t0)/(2ng)",
+      "id": "X07",
+      "image_kind": "functional_schematic",
+      "source_url": null,
+      "asset": "shared/X07.svg"
+    }
+  ],
+  "references": {
+    "raman_se": {
+      "title": "Hausner et al. (2011). Calibrating Single-Ended Fiber-Optic Raman Spectra Distributed Temperature Sensing Data",
+      "url": "https://doi.org/10.3390/s111110859",
+      "evidence": "Open-access primary research; calibration equations and differential attenuation."
+    },
+    "raman_de": {
+      "title": "van de Giesen et al. (2012). Double-Ended Calibration of Fiber-Optic Raman Spectra Distributed Temperature Sensing Data",
+      "url": "https://doi.org/10.3390/s120505471",
+      "evidence": "Open-access primary research; forward/reverse differential-attenuation correction."
+    },
+    "raman_code": {
+      "title": "Park et al. (2006). Raman-based distributed temperature sensor with simplex coding and link optimization",
+      "url": "https://pure.kaist.ac.kr/en/publications/raman-based-distributed-temperature-sensor-with-simplex-coding-an/",
+      "evidence": "Author institution record and abstract; coded OTDR architecture. No performance figures copied into this atlas."
+    },
+    "raman_count": {
+      "title": "Tanner et al. (2011). High-resolution single-mode fiber-optic distributed Raman sensor for absolute temperature measurement using superconducting nanowire single-photon detectors",
+      "url": "https://doi.org/10.1063/1.3656702",
+      "evidence": "Primary research; full manuscript available from NIST: https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910008"
+    },
+    "brillouin_t": {
+      "title": "Kurashima, Horiguchi & Tateda (1990). Distributed-temperature sensing using stimulated Brillouin scattering in optical silica fibers",
+      "url": "https://doi.org/10.1364/OL.15.001038",
+      "evidence": "Primary research; Brillouin temperature sensing under controlled strain conditions."
+    },
+    "botda": {
+      "title": "Horiguchi & Tateda (1989). Optical-fiber-attenuation investigation using stimulated Brillouin scattering between a pulse and a continuous wave",
+      "url": "https://doi.org/10.1364/OL.14.000408",
+      "evidence": "Primary research; counter-propagating pulsed pump and CW probe."
+    },
+    "ofdr": {
+      "title": "Froggatt & Moore (1998). High-spatial-resolution distributed strain measurement in optical fiber with Rayleigh scatter",
+      "url": "https://doi.org/10.1364/AO.37.001735",
+      "evidence": "Primary research; local Rayleigh spectral cross-correlation."
+    }
+  },
+  "figure_record": {
+    "tool": "deterministic Python SVG + ReportLab",
+    "imagegen": false,
+    "measurement_data": false,
+    "dead_water_alignment": "checked/not required: principles diagram, no field data",
+    "date": "2026-10-06"
+  }
+}
