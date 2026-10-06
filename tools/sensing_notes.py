@@ -114,7 +114,7 @@ def refresh_notes():
     topics=json.loads((ROOT/'knowledge'/'topics.json').read_text(encoding='utf-8'))
     for t in topics:
         kind=t['slug'].split('-')[0]
-        if kind in INTRO:
+        if t.get('category')=='instrumentation' and kind in INTRO:
             t['title']={'zh':INTRO[kind]['title'],'en':INTRO[kind]['en']}
             t['summary']={'zh':INTRO[kind]['lead'],'en':INTRO[kind]['lead_en']}
     (ROOT/'knowledge'/'topics.json').write_text(json.dumps(topics,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -123,6 +123,29 @@ def refresh_notes():
         replaces={'DAS 光路与原理图册':INTRO['das']['title'],'DAS optical-path and principles atlas':INTRO['das']['en'],'DTS 温度传感原理图册':INTRO['dts']['title'],'DTS temperature-sensing atlas':INTRO['dts']['en'],'DSS 应变传感原理图册':INTRO['dss']['title'],'DSS strain-sensing atlas':INTRO['dss']['en'],'35 类元件、九类光路与逐支路公式，配套交互图册和 PDF。':INTRO['das']['lead'],'35 components, nine paths, and branch equations, with an interactive atlas and PDF.':INTRO['das']['lead_en'],'仪器原理图册':'仪器原理说明','原理图册':'原理说明','principles atlases':'principles notes','DSS atlases':'DSS notes','atlases 05 → 07':'notes 05 → 07'}
         for old,new in replaces.items():s=s.replace(old,new)
         p.write_text(s,encoding='utf-8')
+    install_instrument_section()
     print('Updated point-by-point DAS/DTS/DSS Knowledge pages; no PDF or package entry links.')
+
+def install_instrument_section():
+    from build_sensing_atlases import bi
+    p=ROOT/'knowledge'/'dfos-principles.html';s=p.read_text(encoding='utf-8')
+    marker='<!-- instrument-atlas-links -->'
+    if marker in s:
+        start=s.index(marker);end=s.index('</section>',start)+len('</section>');s=s[:start]+s[end:]
+    cards=[
+      ('DAS','动态应变：相位或瑞利谱变化','Dynamic strain: phase or Rayleigh spectral changes','9 类代表实现：强度直检、外差/零差相干、延迟干涉、PGC、双脉冲、啁啾、频扫与 OFDR。','Nine implementations: intensity, heterodyne/homodyne, delayed interference, PGC, dual-pulse, chirped-pulse, frequency scan, and OFDR.'),
+      ('DTS','温度：拉曼比值及其他测温路线','Temperature: Raman ratios and other thermometry routes','6 类代表实现：单端/双端拉曼、编码、光子计数，以及布里渊、瑞利测温；分别说明标定条件。','Six implementations: single/double-ended Raman, coding, photon counting, and Brillouin/Rayleigh thermometry, with calibration conditions.'),
+      ('DSS','光纤应变：布里渊频移或瑞利谱移','Fiber strain: Brillouin or Rayleigh spectral shifts','7 类代表实现：BOTDR、BOTDA、DPP-BOTDA、BOFDA、BOCDA、OFDR 与频扫相干 OTDR。','Seven implementations: BOTDR, BOTDA, DPP-BOTDA, BOFDA, BOCDA, OFDR, and frequency-scanned coherent OTDR.'),
+    ]
+    section=marker+'<section class="topic-section" id="instrumentation">'+bi('03 / 仪器原理','03 / INSTRUMENT PRINCIPLES',attrs='class="level-label"')+bi('仪器原理：从散射到实现','Instrument principles: from scattering to implementation','h2')+bi('前面介绍散射机制，这里进一步看仪器怎样发射、接收和解调。我们整理的实现部分按 DAS、DTS、DSS 分开，包含元件作用、代表性光路、关键公式和适用条件。','After the scattering mechanisms, examine how instruments launch, receive, and demodulate light. Our implementation sections cover DAS, DTS, and DSS through components, representative paths, key equations, and conditions.','p')+'<div class="instrument-implementations">'
+    for kind,title,en,desc,de in cards:
+        section+='<article><span class="eyebrow">'+kind+'</span>'+bi(title,en,'h3')+bi(desc,de,'p')+'<a href="'+kind.lower()+'-optical-atlas.html#routes">'+bi('进入 '+kind+' 实现部分 →','Explore '+kind+' implementations →')+'</a></article>'
+    section+='</div></section>'
+    pos=s.index('<section class="topic-section" id="limits">');s=s[:pos]+section+s[pos:]
+    toc='<li><a data-zh="仪器原理：从散射到实现" data-en="Instrument principles: from scattering to implementation" href="#instrumentation">仪器原理：从散射到实现</a></li>'
+    if 'href="#instrumentation"' not in s:
+        pos=s.rfind('<li>',0,s.index('href="#limits"'));s=s[:pos]+toc+s[pos:]
+    s=s.replace('data-zh="03 / 解释边界" data-en="03 / LIMITS" class="level-label">03 / 解释边界','data-zh="04 / 解释边界" data-en="04 / LIMITS" class="level-label">04 / 解释边界')
+    p.write_text(s,encoding='utf-8')
 
 if __name__=='__main__':refresh_notes()

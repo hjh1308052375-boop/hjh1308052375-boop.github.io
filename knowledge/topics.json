@@ -43,12 +43,12 @@
     "number": "04",
     "category": "applications",
     "title": {
-      "zh": "DTS：原理与实现方式",
-      "en": "DTS: principles and implementations"
+      "zh": "用 DTS 观察水泥水化与凝结",
+      "en": "Using DTS to observe cement hydration and setting"
     },
     "summary": {
-      "zh": "从拉曼强度比出发，分点介绍温度测量、单端与双端标定，以及布里渊、瑞利测温的条件。",
-      "en": "Start with Raman intensity ratios, then explore temperature sensing, single/double-ended calibration, and the conditions for Brillouin/Rayleigh thermometry."
+      "zh": "温度随深度和时间的变化能提供什么证据？把水化放热、热传递与水泥强度区分开。",
+      "en": "What can temperature through depth and time tell us? Separate hydration heat, heat transfer, and cement strength."
     }
   },
   {
